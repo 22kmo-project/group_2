@@ -34,7 +34,7 @@ void Transactions::getTransactions()
 {
     QString wb = token;  //Haetaan saatu webToken
     QByteArray bearerToken = "Bearer "+wb.toUtf8();  //Tungetaan token qbytearrayhin
-    QString site_url = restApiURL::getBaseUrl()+"/logs/" + QString::number(id_card);;  //määritetään oikea id
+    QString site_url = restApiURL::getBaseUrl()+"/logs/" + QString::number(id_card);  //määritetään oikea id
     QNetworkRequest request((site_url)); //määritetään requestiin urli
     request.setRawHeader(QByteArray("Authorization"), (bearerToken)); //asetetaan requestin Authorization headeri tokeniksi
 
@@ -63,5 +63,11 @@ void Transactions::logsSlots(QNetworkReply *reply)
     }
 
     qDebug()<<response_data;
+    qDebug()<<logs;
     reply->deleteLater();
+}
+
+void Transactions::setTransactionsView()
+{
+
 }

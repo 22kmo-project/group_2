@@ -27,6 +27,8 @@ private slots:
 
 private:
     void getTransactions();
+    void setTransactionsView();
+
     Ui::Transactions *ui;
     QString token;
     int id_card;

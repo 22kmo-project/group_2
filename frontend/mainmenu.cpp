@@ -26,7 +26,8 @@ void MainMenu::on_btn_Cardidhaku_clicked()
 {
     emit resettimer30();
 }
-void MainMenu::timer10slot() //HOLDERI
+
+void MainMenu::timer10slot()
 {
     sessiontime10++;
     if (sessiontime10){

@@ -15,6 +15,12 @@ public:
     explicit Transactions(QWidget *parent = nullptr);
     ~Transactions();
 
+private slots:
+    void on_btn_Back_clicked();
+
+    void on_btn_LogOut_clicked();
+
+
 private:
     Ui::Transactions *ui;
 };

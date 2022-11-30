@@ -1,5 +1,7 @@
 #include "transactions.h"
 #include "ui_transactions.h"
+#include <QDebug>
+
 
 Transactions::Transactions(QWidget *parent) :
     QDialog(parent),
@@ -11,4 +13,15 @@ Transactions::Transactions(QWidget *parent) :
 Transactions::~Transactions()
 {
     delete ui;
+}
+
+void Transactions::on_btn_Back_clicked()
+{
+
+}
+
+
+void Transactions::on_btn_LogOut_clicked()
+{
+    qDebug()<<"logout";
 }

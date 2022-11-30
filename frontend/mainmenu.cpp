@@ -24,6 +24,21 @@ void MainMenu::getDataSlot(QNetworkReply *reply)
 
 void MainMenu::on_btn_Cardidhaku_clicked()
 {
- emit resettimer30();
+    emit resettimer30();
+}
+void MainMenu::timer10slot() //HOLDERI
+{
+    sessiontime10++;
+    if (sessiontime10){
+        emit timer10isup();
+    }
+}
+
+void MainMenu::on_transactions_Button_clicked() //Lisää Mainiin
+{
+    connect(mainmenu,SIGNAL(resettimer30()),this,SLOT(resettimerslot()));
+    connect(mainmenu,SIGNAL(timer10isup()),this,SLOT(backtomainmenu()));// IKKUNA AVATESSA AINA SIGNAALI KYTKETTÄVÄ
+    transactions = new Transactions();
+    transactions->show();
 }
 

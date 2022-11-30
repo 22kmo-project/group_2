@@ -13,18 +13,21 @@ SOURCES += \
     mainmenu.cpp \
     mainmenucredit.cpp \
     mainwindow.cpp \
-    session.cpp
+    session.cpp \
+    transactions.cpp
 
 HEADERS += \
     mainmenu.h \
     mainmenucredit.h \
     mainwindow.h \
-    session.h
+    session.h \
+    transactions.h
 
 FORMS += \
     mainmenu.ui \
     mainmenucredit.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    transactions.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

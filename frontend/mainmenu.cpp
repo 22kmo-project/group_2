@@ -31,15 +31,15 @@ void MainMenu::timer10slot()
 {
     sessiontime10++;
     if (sessiontime10){
-        emit timer10isup();
+        //emit timer10isup();
     }
 }
 
 void MainMenu::on_transactions_Button_clicked() //Lisää Mainiin
 {
-    connect(mainmenu,SIGNAL(resettimer30()),this,SLOT(resettimerslot()));
-    connect(mainmenu,SIGNAL(timer10isup()),this,SLOT(backtomainmenu()));// IKKUNA AVATESSA AINA SIGNAALI KYTKETTÄVÄ
-    transactions = new Transactions();
+    //connect(mainmenu,SIGNAL(resettimer30()),this,SLOT(resettimerslot()));
+    //connect(mainmenu,SIGNAL(timer10isup()),this,SLOT(backtomainmenu()));// IKKUNA AVATESSA AINA SIGNAALI KYTKETTÄVÄ
+    transactions = new Transactions(token, id_card);
     transactions->show();
 }
 

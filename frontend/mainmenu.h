@@ -20,6 +20,7 @@ public:
     ~MainMenu();
     void getData();
     int id_card;
+
 signals:
     void resettimer30();
 

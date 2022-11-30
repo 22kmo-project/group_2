@@ -13,6 +13,7 @@ SOURCES += \
     mainmenu.cpp \
     mainmenucredit.cpp \
     mainwindow.cpp \
+    restapiurl.cpp \
     session.cpp \
     transactions.cpp
 
@@ -20,6 +21,7 @@ HEADERS += \
     mainmenu.h \
     mainmenucredit.h \
     mainwindow.h \
+    restapiurl.h \
     session.h \
     transactions.h
 

@@ -2,7 +2,7 @@ const db = require('../database');
 
 const logs = {
   getById: function(id, callback) {
-    return db.query('select * from logs where id_logs=?', [id], callback);
+    return db.query('call get_logs(?);', [id], callback);
   },
   getAll: function(callback) {
     return db.query('select * from logs', callback);

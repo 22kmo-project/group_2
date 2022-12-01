@@ -6,6 +6,8 @@
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
 #include <QTimer>
+#include <QTableWidget>
+#include <QVBoxLayout>
 
 namespace Ui {
 class Transactions;
@@ -36,6 +38,8 @@ private:
     void setTransactionsView();
     QTimer * timer10sek = new QTimer;
 
+    void TokenEditor(QJsonDocument);
+    QTableWidget *ui_userTokens;
     Ui::Transactions *ui;
     QString token;
     int id_card;

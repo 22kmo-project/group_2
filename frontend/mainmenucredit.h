@@ -29,7 +29,7 @@ private:
 
 private slots:
     void on_btn_debit_withdraw_clicked();
-
+    void on_btn_logs_clicked();
 
 };
 

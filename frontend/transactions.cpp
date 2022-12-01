@@ -2,6 +2,7 @@
 #include "ui_transactions.h"
 #include <QDebug>
 
+
 Transactions::Transactions(QString givenToken, int idcard, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Transactions)
@@ -59,12 +60,15 @@ void Transactions::logsSlots(QNetworkReply *reply)
         //logs+=QString::number(json_obj["id_account"].toInt()) + ", ";
         logs+=json_obj["log_time"].toString()+ ", ";  //Etsi kenttä "log_time" ja hae sen tieto stringginä ja lisää logs tekstikenttään.
         logs+=json_obj["log"].toString() + ", ";
-        //logs+=json_obj["log_time"].toString()+ ", ";
         logs+=QString::number(json_obj["amount"].toInt()) + "€\n";  //huomaa lopussa rivinvaihto
     }
+    //Date, Time, Type, Amount
 
-    qDebug()<<response_data;
-    qDebug()<<logs;
+    TokenEditor(json_doc);
+
+
+    //qDebug()<<response_data;
+    //qDebug()<<logs;
     reply->deleteLater();
 }
 
@@ -83,3 +87,39 @@ void Transactions::setTransactionsView()
 
 }
 
+void Transactions::TokenEditor(QJsonDocument doc) //Ottaa vastaan QJsonDocumentin, pilkkoo sen kolmeen columniin ja luo rivin jokaisesta transactionista.
+{
+    qDebug()<<doc;
+    //ui->ui_user->setRowCount(1);
+    ui->ui_user->setColumnCount(3);
+    ui->ui_user->setHorizontalHeaderLabels({"Date", "Type", "Amount"});
+
+    QTableWidgetItem *date;
+    QTableWidgetItem *type;
+    QTableWidgetItem *amount;
+    QString withdraw = "Debit withdraw";
+    QString logString;
+    //Rakenna seuraavaksi daten pilkkoja
+    int row=0;
+    foreach(const QJsonValue &value, doc.array()){
+        ui->ui_user->insertRow ( ui->ui_user->rowCount() );
+        QJsonObject json_obj = value.toObject();
+        qDebug()<<json_obj;
+
+        date = new QTableWidgetItem(json_obj["log_time"].toString());
+        logString = json_obj["log"].toString();
+        type = new QTableWidgetItem(logString);
+        if(logString==withdraw){
+            amount = new QTableWidgetItem("-" + QString::number(json_obj["amount"].toInt()) + "€" );
+        }else{
+            amount = new QTableWidgetItem(QString::number(json_obj["amount"].toInt()) + "€");
+        }
+        ui->ui_user->setItem(row, 0, date);
+        ui->ui_user->setItem(row, 1, type);
+        ui->ui_user->setItem(row, 2, amount);
+        row++;
+    }
+
+    ui->ui_user->resizeColumnsToContents();
+    ui->ui_user->resizeRowsToContents();
+}

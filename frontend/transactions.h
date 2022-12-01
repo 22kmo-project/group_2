@@ -7,7 +7,6 @@
 #include <QJsonDocument>
 #include <QTimer>
 #include <QTableWidget>
-#include <QVBoxLayout>
 
 namespace Ui {
 class Transactions;
@@ -34,13 +33,13 @@ signals:
     void backtomainmenu();
 
 private:
+    QTimer * timer10sek = new QTimer;
+    Ui::Transactions *ui;
+
     void getTransactions();
     void setTransactionsView();
-    QTimer * timer10sek = new QTimer;
-
     void TokenEditor(QJsonDocument);
-    QTableWidget *ui_userTokens;
-    Ui::Transactions *ui;
+
     QString token;
     int id_card;
     int time10=0;
@@ -48,7 +47,6 @@ private:
     QNetworkAccessManager *logsManager;
     QNetworkReply *reply;
     QByteArray response_data;
-
 };
 
 #endif // TRANSACTIONS_H

@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>962</width>
-    <height>559</height>
+    <width>1280</width>
+    <height>720</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1920</width>
+    <height>1080</height>
+   </size>
   </property>
   <property name="font">
    <font>
@@ -22,7 +28,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>460</y>
+     <y>620</y>
      <width>131</width>
      <height>81</height>
     </rect>
@@ -30,6 +36,7 @@
    <property name="font">
     <font>
      <pointsize>20</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
@@ -39,8 +46,8 @@
   <widget class="QPushButton" name="btn_LogOut">
    <property name="geometry">
     <rect>
-     <x>800</x>
-     <y>450</y>
+     <x>1120</x>
+     <y>620</y>
      <width>131</width>
      <height>81</height>
     </rect>
@@ -48,19 +55,20 @@
    <property name="font">
     <font>
      <pointsize>20</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
     <string>LogOut</string>
    </property>
   </widget>
-  <widget class="QTableWidget" name="ui_user">
+  <widget class="QTableWidget" name="transactions_Table">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>10</y>
-     <width>911</width>
-     <height>431</height>
+     <y>30</y>
+     <width>1231</width>
+     <height>571</height>
     </rect>
    </property>
    <property name="font">

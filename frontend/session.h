@@ -12,6 +12,7 @@
 #include "mainwindow.h"
 #include "demowindow.h"
 #include "transactions.h"
+#include "savings.h"
 
 
 class session : public QObject
@@ -43,6 +44,7 @@ private:
     MainWindow * loginwindow;
     demowindow * demo;
     Transactions * transactions;
+    savings * saving;
 
     // -------AJASTIMET--------------
     QTimer * session30timer;

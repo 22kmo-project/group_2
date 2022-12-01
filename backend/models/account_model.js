@@ -14,6 +14,13 @@ const account = {
       callback
     ); // tieto lähtee arrayna
   },
+  savingsmode: function(savings_account, callback) { //testi
+    return db.query(
+      'select savingsmode from owner where id_owner = (select id_account from account where id_card = ?);',
+      [savings_account.id_card],
+      callback
+    );
+  },
   delete: function(id, callback) {
     return db.query('delete from account where id_account=?', [id], callback);
   },

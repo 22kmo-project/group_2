@@ -28,10 +28,14 @@ private slots:
 
     void timer10Slot();
 
+    void on_btn_logout_clicked();
+
 signals:
     void backtomainmenu();
+    void resettimer30();
 
 private:
+    void getsavings();
     Ui::savings *ui;
     QTimer * timer10sek = new QTimer;
     QString token;

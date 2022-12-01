@@ -135,6 +135,12 @@ void session::nextWindowSlot(int i)
      connect(transactions,SIGNAL(backtomainmenu()),this,SLOT(backtomainmenu()));
      transactions->show();
      break;
+case 3:
+     saving=new savings(sessiontoken,id_card);
+     connect(saving,SIGNAL(backtomainmenu()),this,SLOT(backtomainmenu()));
+     connect(saving,SIGNAL(resettimer30()),this,SLOT(resettimerslot()));
+     saving->show();
+
 
 }
 }

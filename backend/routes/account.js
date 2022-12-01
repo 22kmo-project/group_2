@@ -39,6 +39,17 @@ function(request, response) {
   });
 });
 
+router.post('/savingsmode', 
+function(request, response) {
+  card.savingsmode(request.body, function(err, dbResult) { //card vai account??
+    if (err) {
+      response.json(err);
+    } else {
+      response.json(dbResult[0]);
+    }
+  });
+});
+
 router.post('/getbalance',
 function(request,response) {
 card.get_balance(request.body, function(err,dbResult){

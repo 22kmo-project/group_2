@@ -20,10 +20,11 @@ public:
     void resetAllTimers();
     void cleardata();
 
+
 signals:
     void resettimer30();
-    void timer10isup();
     void nextwindow(int);
+    void logout();
 
 private:
     Ui::MainMenu *ui;
@@ -34,6 +35,7 @@ private slots:
     void on_btn_debit_withdraw_clicked();
     void on_btn_logs_clicked();
     void on_btn_debit_settings_clicked();
+    void on_btn_logout_clicked();
 
 };
 

@@ -30,6 +30,11 @@ void savings::on_btn_savingsOff_clicked()
 
 }
 
+void savings::logsSlots(QNetworkReply *reply)
+{
+
+}
+
 void savings::timer10Slot()
 {
     time10++;
@@ -38,5 +43,26 @@ void savings::timer10Slot()
         emit backtomainmenu();
         this->close();
     }
+}
+
+
+void savings::on_btn_logout_clicked()
+{
+    qDebug()<<"logout";
+}
+
+void savings::getsavings()
+{
+    QString wb = token;
+    QByteArray bearerToken = "Bearer "+wb.toUtf8();
+    QString site_url = "http://localhost:3000/account/savingsmode" + QString::number(id_card);  //!!!
+    QNetworkRequest request((site_url));
+    request.setRawHeader(QByteArray("Authorization"), (bearerToken));
+
+    savingsManager = new QNetworkAccessManager(this);
+
+    connect(savingsManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(logsSlots(QNetworkReply*)));
+    reply = savingsManager->get(request);
+
 }
 

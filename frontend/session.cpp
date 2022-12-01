@@ -133,6 +133,7 @@ void session::nextWindowSlot(int i)
  case 2:
      transactions=new Transactions(sessiontoken,id_card);
      connect(transactions,SIGNAL(backtomainmenu()),this,SLOT(backtomainmenu()));
+     connect(transactions,SIGNAL(resettimer30()),this,SLOT(resettimerslot()));
      transactions->show();
      break;
 

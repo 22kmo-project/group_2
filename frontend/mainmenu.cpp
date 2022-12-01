@@ -42,3 +42,11 @@ void MainMenu::on_btn_logs_clicked()
     this->hide();
 }
 
+
+void MainMenu::on_btn_debit_settings_clicked()
+{
+    resetAllTimers();
+    emit nextwindow(3);
+    this->hide();
+}
+

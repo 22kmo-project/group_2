@@ -13,6 +13,7 @@ SOURCES += \
     mainmenu.cpp \
     mainmenucredit.cpp \
     mainwindow.cpp \
+    savings.cpp \
     session.cpp \
     transactions.cpp
 
@@ -20,6 +21,7 @@ HEADERS += \
     mainmenu.h \
     mainmenucredit.h \
     mainwindow.h \
+    savings.h \
     session.h \
     transactions.h
 
@@ -27,6 +29,7 @@ FORMS += \
     mainmenu.ui \
     mainmenucredit.ui \
     mainwindow.ui \
+    savings.ui \
     transactions.ui
 
 # Default rules for deployment.

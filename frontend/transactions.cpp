@@ -1,7 +1,8 @@
 #include "transactions.h"
 #include "ui_transactions.h"
 #include <QDebug>
-
+#include <QAbstractScrollArea>
+#include <QScrollBar>
 
 Transactions::Transactions(QString givenToken, int idcard, QWidget *parent) :
     QDialog(parent),
@@ -13,6 +14,8 @@ Transactions::Transactions(QString givenToken, int idcard, QWidget *parent) :
     token = givenToken;
     id_card = idcard;
     getTransactions();
+
+    connect(ui->transactions_Table->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(timerReset()));
 }
 
 Transactions::~Transactions()
@@ -52,8 +55,6 @@ void Transactions::logsSlots(QNetworkReply *reply)
 {
     response_data = reply->readAll();  //luetaan reply
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data); //luodaan replystä json-data järkevään muotoon
-    QJsonArray json_array = json_doc.array(); //määritetään siitä array
-    QString logs;
 
     TokenEditor(json_doc);
     reply->deleteLater();
@@ -67,6 +68,12 @@ void Transactions::timer10Slot()
         emit backtomainmenu();
         this->close();
     }
+}
+
+void Transactions::timerReset()
+{
+    time10 = 0;
+    emit resettimer30();
 }
 
 void Transactions::setTransactionsView()

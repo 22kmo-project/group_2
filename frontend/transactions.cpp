@@ -22,7 +22,8 @@ Transactions::~Transactions()
 
 void Transactions::on_btn_Back_clicked()
 {
-emit backtomainmenu();
+    timer10sek->stop();
+    emit backtomainmenu();
     this->close();
 }
 
@@ -89,7 +90,6 @@ void Transactions::TokenEditor(QJsonDocument doc) //Ottaa vastaan QJsonDocumenti
     QTableWidgetItem *type;
 
     QTableWidgetItem *amount;
-    QString withdraw = "Debit withdraw";
     QString logString;
 
     int row=0;
@@ -106,7 +106,7 @@ void Transactions::TokenEditor(QJsonDocument doc) //Ottaa vastaan QJsonDocumenti
 
         logString = json_obj["log"].toString();
         type = new QTableWidgetItem(logString);
-        if(logString==withdraw){  //Tarkistetaan oliko transactionin tyyppi Depit withdraw ja muutetaan määrä negatiiviseksi jos oli
+        if(logString=="Debit withdraw" || logString=="Credit withdraw"){  //Tarkistetaan oliko transactionin tyyppi Debit/credit withdraw ja muutetaan määrä negatiiviseksi jos oli
             amount = new QTableWidgetItem("-" + QString::number(json_obj["amount"].toInt()) + "€" );
         }else{
             amount = new QTableWidgetItem(QString::number(json_obj["amount"].toInt()) + "€");

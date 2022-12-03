@@ -19,6 +19,7 @@ public:
 
     void resetAllTimers();
     void cleardata();
+    void updateTimeUi(int);
 
 
 signals:

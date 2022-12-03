@@ -42,11 +42,6 @@ void MainMenu::on_btn_logs_clicked()
     this->hide();
 }
 
-void MainMenu::on_btn_logout_clicked()
-{
-   // emit logout();
-}
-
 
 void MainMenu::on_btn_debit_settings_clicked()
 {
@@ -55,3 +50,7 @@ void MainMenu::on_btn_debit_settings_clicked()
     this->hide();
 }
 
+void MainMenu::on_btn_logout_clicked()
+{
+    emit logout();
+}

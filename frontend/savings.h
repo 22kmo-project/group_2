@@ -18,9 +18,10 @@ class savings : public QWidget
 public:
     explicit savings(QString, int, QWidget *parent = nullptr);
     ~savings();
+    double amountPercage; //säästöön prosentteina
 
 private slots:
-    void on_btn_savingsOn_clicked();
+
 
     void on_btn_savingsOff_clicked();
 
@@ -30,9 +31,11 @@ private slots:
 
     void on_btn_logout_clicked();
 
+    void savingsSlot(QNetworkReply *reply);
+
 signals:
     void backtomainmenu();
-    void resettimer30();
+
 
 private:
     void getsavings();

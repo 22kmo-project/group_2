@@ -11,6 +11,7 @@ savings::savings(QString givenToken, int idcard, QWidget *parent) :
     ui->setupUi(this);
     token = givenToken;
     id_card = idcard;
+    getsavings();
 
 }
 
@@ -19,10 +20,7 @@ savings::~savings()
     delete ui;
 }
 
-void savings::on_btn_savingsOn_clicked()
-{
 
-}
 
 
 void savings::on_btn_savingsOff_clicked()
@@ -51,6 +49,8 @@ void savings::on_btn_logout_clicked()
     qDebug()<<"logout";
 }
 
+
+
 void savings::getsavings()
 {
     QString wb = token;
@@ -63,6 +63,12 @@ void savings::getsavings()
 
     connect(savingsManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(logsSlots(QNetworkReply*)));
     reply = savingsManager->get(request);
+
+}
+
+
+void savings::savingsSlot(QNetworkReply *reply)
+{
 
 }
 

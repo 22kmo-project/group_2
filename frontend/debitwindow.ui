@@ -225,7 +225,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Account balance: </string>
+     <string/>
     </property>
    </widget>
   </widget>

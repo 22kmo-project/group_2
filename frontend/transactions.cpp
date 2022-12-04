@@ -86,11 +86,13 @@ void Transactions::TokenEditor(QJsonDocument doc) //Ottaa vastaan QJsonDocumenti
     //qDebug()<<doc;
     //ui->transactions_Table->setRowCount(1);
     ui->transactions_Table->setColumnCount(4);  //Asetetaan columnien määrä ja otsikot, kaikkia columneja joita sql:stä saadaan ei käytetä
-    ui->transactions_Table->setHorizontalHeaderLabels({"Date", "Time", "Type", "Amount"});
+    ui->transactions_Table->setHorizontalHeaderLabels({" Date ", " Time ", " Type ", " Amount "});
 
     QTableWidgetItem *date;
     QString dateHolder;
     QStringList splittedDateTime;
+    QStringList splittedYearMonthDay;
+    QString rearrangedDate;
     QString timeHolder;
     QTableWidgetItem *time;
 
@@ -104,10 +106,18 @@ void Transactions::TokenEditor(QJsonDocument doc) //Ottaa vastaan QJsonDocumenti
         ui->transactions_Table->insertRow(ui->transactions_Table->rowCount()); //Lisää rivi tableen
         QJsonObject json_obj = value.toObject();  //objecti rivistä
         //qDebug()<<json_obj;
-
+        rearrangedDate= "";
         dateHolder = json_obj["log_time"].toString();  //Pilkotaan log_time päivämäärään ja aikaan koska muoto on 2022-11-30T19:34:43.000Z
         splittedDateTime = dateHolder.split("T");  //["2022-11-30","19:34:43.000Z"]
-        date = new QTableWidgetItem(splittedDateTime[0]);//["2022-11-30"]
+        splittedYearMonthDay = splittedDateTime[0].split("-");
+        for(int i=splittedYearMonthDay.length()-1; i>=0;i--){
+            rearrangedDate.append(splittedYearMonthDay[i]);
+            if(i!=0){
+                rearrangedDate.append(".");
+            }
+        }
+        //date = new QTableWidgetItem(splittedDateTime[0]);//["2022-11-30"]
+        date = new QTableWidgetItem(rearrangedDate);
         timeHolder = splittedDateTime[1].split(".")[0];  //["19:34:43", "000Z"]Otetaan ajasta pelkät tunnit/minuutit/sekunnit pilkkomalla pisteen kohdalta ja ottamalla sen uuden arrayn ensimmäinen osa
         time = new QTableWidgetItem(timeHolder); //["19:34:43"]
 
@@ -126,6 +136,7 @@ void Transactions::TokenEditor(QJsonDocument doc) //Ottaa vastaan QJsonDocumenti
     }
     ui->transactions_Table->resizeColumnsToContents();
     ui->transactions_Table->resizeRowsToContents();
+    ui->transactions_Table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->transactions_Table->scrollToBottom();
 }
 

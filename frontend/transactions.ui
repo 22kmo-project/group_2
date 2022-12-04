@@ -24,6 +24,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: qlineargradient(spread:pad, x1:0.46, y1:0, x2:0.472, y2:1, stop:0 rgba(0, 20, 15, 255), stop:1 rgba(17, 73, 74, 255));</string>
+  </property>
   <widget class="QPushButton" name="btn_Back">
    <property name="geometry">
     <rect>
@@ -35,9 +38,16 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>20</pointsize>
-     <bold>true</bold>
+     <pointsize>-1</pointsize>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: qlineargradient(spread:pad, x1:0.494, y1:0, x2:0.517, y2:1, stop:0 rgba(36, 39, 43, 255), stop:1 rgba(72, 74, 78, 255));
+border:0px solid black;
+border-radius: 12px;
+color: #c9bfb6;
+font-size: 14px;</string>
    </property>
    <property name="text">
     <string>Back</string>
@@ -54,9 +64,16 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>20</pointsize>
-     <bold>true</bold>
+     <pointsize>-1</pointsize>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: qlineargradient(spread:pad, x1:0.494, y1:0, x2:0.517, y2:1, stop:0 rgba(36, 39, 43, 255), stop:1 rgba(72, 74, 78, 255));
+border:0px solid black;
+border-radius: 12px;
+color: #c9bfb6;
+font-size: 14px;</string>
    </property>
    <property name="text">
     <string>LogOut</string>
@@ -65,19 +82,74 @@
   <widget class="QTableWidget" name="transactions_Table">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>240</x>
      <y>30</y>
-     <width>1231</width>
+     <width>801</width>
      <height>571</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>20</pointsize>
+     <family>Century Gothic</family>
+     <pointsize>-1</pointsize>
     </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QTableView{
+	background-color: rgb(72, 74, 78);
+	alternate-background-color: rgb(72, 74, 70);
+	border: 0px solid #4181C0;
+	color: #c9bfb6;
+	font-size: 14px;
+}
+QTableView::item{
+	padding: 8px;
+	border-radius: 8px;
+}
+QTableView::item QTableCornerButton::section{
+	background-color: black;
+color: black;
+	border: 1px;
+}
+QTableCornerButton::section{
+	background-color: black;
+	border: 1px;
+}
+QTableView QTableCornerButton{
+	background-color: black;
+	border: 1px;
+}
+QTableWidget QTableCornerButton::section{
+	background-color: black;
+	border: 1px;
+}
+QTableCornerButton{
+	background-color: black;
+	border: 1px;
+}
+QHeaderView{
+	font-size: 18px;
+	color: rgb(36, 39, 43, 255);
+	font-style: none;
+	border-radius: 12px;
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+	font-family: Century Gothic;
+}
+QHeaderView::section{
+	background-color: rgb(182, 184, 188);
+	border: none;
+}
+</string>
    </property>
    <property name="alternatingRowColors">
     <bool>true</bool>
+   </property>
+   <property name="cornerButtonEnabled">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>

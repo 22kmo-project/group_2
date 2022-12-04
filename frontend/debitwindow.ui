@@ -206,7 +206,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Owner info:</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_balance">

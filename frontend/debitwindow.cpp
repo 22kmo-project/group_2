@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QByteArray>
 
-DebitWindow::DebitWindow(QString token, int idcard,QWidget *parent) :
+DebitWindow::DebitWindow(QString givenToken, int idcard,QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::DebitWindow)
 {
@@ -82,7 +82,7 @@ void DebitWindow::getOwnerInfoSlot(QNetworkReply *reply2)
 
 void DebitWindow::on_btn20_clicked()
 {
-    resetAllTimers();
+    timer10sek->stop();
     emit nextwindow(1);
     this->close();
 }
@@ -90,7 +90,7 @@ void DebitWindow::on_btn20_clicked()
 
 void DebitWindow::on_btn40_clicked()
 {
-    resetAllTimers();
+    timer10sek->stop();
     emit nextwindow(1);
     this->close();
 }
@@ -98,7 +98,7 @@ void DebitWindow::on_btn40_clicked()
 
 void DebitWindow::on_btn60_clicked()
 {
-    resetAllTimers();
+    timer10sek->stop();
     emit nextwindow(1);
     this->close();
 }
@@ -106,7 +106,7 @@ void DebitWindow::on_btn60_clicked()
 
 void DebitWindow::on_btn100_clicked()
 {
-    resetAllTimers();
+    timer10sek->stop();
     emit nextwindow(1);
     this->close();
 }
@@ -114,7 +114,7 @@ void DebitWindow::on_btn100_clicked()
 
 void DebitWindow::on_btn200_clicked()
 {
-    resetAllTimers();
+    timer10sek->stop();
     emit nextwindow(1);
     this->close();
 }
@@ -122,7 +122,7 @@ void DebitWindow::on_btn200_clicked()
 
 void DebitWindow::on_btn500_clicked()
 {
-    resetAllTimers();
+    timer10sek->stop();
     emit nextwindow(1);
     this->close();
 }
@@ -130,7 +130,7 @@ void DebitWindow::on_btn500_clicked()
 
 void DebitWindow::on_btnBack_clicked()
 {
-    resetAllTimers();
+    timer10sek->stop();
     emit backtomainmenu();
     this->close();
 }

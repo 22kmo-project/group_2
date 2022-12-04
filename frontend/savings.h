@@ -18,7 +18,9 @@ class savings : public QWidget
 public:
     explicit savings(QString, int, QWidget *parent = nullptr);
     ~savings();
-    double amountPercage; //säästöön prosentteina
+    //double amountPercage; //säästöön prosentteina
+    QString savingsOn;
+    QString savingsOff;
 
 private slots:
 
@@ -33,12 +35,14 @@ private slots:
 
     void savingsSlot(QNetworkReply *reply);
 
+    void on_btn_save_savings_clicked();
+
 signals:
     void backtomainmenu();
 
 
 private:
-    void getsavings();
+    void postsavings();
     Ui::savings *ui;
     QTimer * timer10sek = new QTimer;
     QString token;

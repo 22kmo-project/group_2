@@ -1,5 +1,6 @@
 const express = require('express');
 const { response } = require('../app');
+const account = require('../models/account_model');
 const router = express.Router();
 const card = require('../models/account_model');
 
@@ -39,9 +40,9 @@ function(request, response) {
   });
 });
 
-router.post('/savingsmode', 
+router.post('/savingsmode/:id?',
 function(request, response) {
-  card.savingsmode(request.body, function(err, dbResult) { //card vai account??
+  account.update_savingsmode(request.params.id, function(err, dbResult) {  //testttu myös pelkkä savingsmode
     if (err) {
       response.json(err);
     } else {
@@ -52,7 +53,7 @@ function(request, response) {
 
 router.post('/getbalance',
 function(request,response) {
-card.get_balance(request.body, function(err,dbResult){
+account.get_balance(request.body, function(err,dbResult){
     if(err) {
         response.json(err);
     } else {
@@ -65,7 +66,7 @@ card.get_balance(request.body, function(err,dbResult){
 
 router.delete('/:id', 
 function(request, response) {
-  card.delete(request.params.id, function(err, dbResult) {
+  account.delete(request.params.id, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {
@@ -77,7 +78,7 @@ function(request, response) {
 
 router.put('/:id', 
 function(request, response) {
-  card.update(request.params.id, request.body, function(err, dbResult) {
+  account.update(request.params.id, request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {

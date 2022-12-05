@@ -19,7 +19,7 @@ public:
     explicit savings(QString, int, QWidget *parent = nullptr);
     ~savings();
     //double amountPercage; //säästöön prosentteina
-    QString savingsOn;
+    QString savingsUpdate;
     QString savingsOff;
 
 private slots:
@@ -50,6 +50,7 @@ private:
     int time10=0;
 
     QNetworkAccessManager *savingsManager; //!!!
+
     QNetworkReply *reply;
     QByteArray response_data;
 };

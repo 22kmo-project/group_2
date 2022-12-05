@@ -5,6 +5,7 @@ const card = require('../models/card_model');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
+
 router.post('/', 
   function(request, response) {
     if(request.body.cardnumber && request.body.password){

@@ -20,6 +20,8 @@ const card = {
     }); // tieto lähtee arrayna
   },
 
+
+
   getcardid: function(get_cardid, callback) {
     return db.query(
       'select id_card from card where cardnumber = ?',

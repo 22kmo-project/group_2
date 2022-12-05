@@ -7,6 +7,13 @@ const account = {
   getAll: function(callback) {
     return db.query('select * from account', callback);
   },
+  savingsmode: function(id, callback) { //testi
+    return db.query(
+      'call update_savingsmode from account where id_card = ?', //kokeiltu myös select ja pelkkä savingsmode
+      [id],
+      callback
+    );
+  },
   add: function(add_account, callback) {
     return db.query(
       'call make_card_account(?)',
@@ -23,13 +30,7 @@ const account = {
       [account.accountnumber, account.password, account.credit,account.id_card,id],
       callback
     );
-  },
-  savingsmode: function(savings_account, callback) { //testi
-    return db.query(
-      'select savingsmode from owner where id_owner = (select id_account from account where id_card = ?);',
-      [savings_account.id_card],
-      callback
-    );
+
   },
 };
 module.exports = account;

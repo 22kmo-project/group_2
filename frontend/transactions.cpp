@@ -105,7 +105,7 @@ void Transactions::TokenEditor(QJsonDocument doc) //Ottaa vastaan QJsonDocumenti
     foreach(const QJsonValue &value, doc.array()){  //Käy json documentin läpi rivi riviltä
         ui->transactions_Table->insertRow(ui->transactions_Table->rowCount()); //Lisää rivi tableen
         QJsonObject json_obj = value.toObject();  //objecti rivistä
-        //qDebug()<<json_obj;
+        qDebug()<<json_obj;
         rearrangedDate= "";
         dateHolder = json_obj["log_time"].toString();  //Pilkotaan log_time päivämäärään ja aikaan koska muoto on 2022-11-30T19:34:43.000Z
         splittedDateTime = dateHolder.split("T");  //["2022-11-30","19:34:43.000Z"]
@@ -137,6 +137,7 @@ void Transactions::TokenEditor(QJsonDocument doc) //Ottaa vastaan QJsonDocumenti
     ui->transactions_Table->resizeColumnsToContents();
     ui->transactions_Table->resizeRowsToContents();
     ui->transactions_Table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->transactions_Table->setCornerWidget(new QWidget());
     ui->transactions_Table->scrollToBottom();
 }
 

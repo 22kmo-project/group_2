@@ -90,7 +90,6 @@ font-size: 14px;</string>
    </property>
    <property name="font">
     <font>
-     <family>Century Gothic</family>
      <pointsize>-1</pointsize>
     </font>
    </property>
@@ -109,27 +108,7 @@ QTableView::item{
 	padding: 8px;
 	border-radius: 8px;
 }
-QTableView::item QTableCornerButton::section{
-	background-color: black;
-color: black;
-	border: 1px;
-}
-QTableCornerButton::section{
-	background-color: black;
-	border: 1px;
-}
-QTableView QTableCornerButton{
-	background-color: black;
-	border: 1px;
-}
-QTableWidget QTableCornerButton::section{
-	background-color: black;
-	border: 1px;
-}
-QTableCornerButton{
-	background-color: black;
-	border: 1px;
-}
+
 QHeaderView{
 	font-size: 18px;
 	color: rgb(36, 39, 43, 255);

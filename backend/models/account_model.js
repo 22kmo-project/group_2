@@ -2,15 +2,15 @@ const db = require('../database');
 
 const account = {
   getById: function(id, callback) {
-    return db.query('select * from account where id_account=?', [id], callback);
+    return db.query('select savingsmode from account where id_account=(select id_account from account where id_card =?)', [id], callback);
   },
   getAll: function(callback) {
     return db.query('select * from account', callback);
   },
-  savingsmode: function(id, callback) { //testi
+  update_savingsmode: function( update, callback) { //testi
     return db.query(
-      'call update_savingsmode from account where id_card = ?', //kokeiltu myös select ja pelkkä savingsmode
-      [id],
+      'call update_savingsmode(?,?)' , //kokeiltu myös select ja pelkkä savingsmode
+      [update.id_card, update.savings],
       callback
     );
   },

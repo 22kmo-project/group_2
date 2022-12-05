@@ -40,9 +40,9 @@ function(request, response) {
   });
 });
 
-router.post('/savingsmode/:id?',
+router.post('/savingsmode',
 function(request, response) {
-  account.update_savingsmode(request.params.id, function(err, dbResult) {  //testttu myös pelkkä savingsmode
+  account.update_savingsmode(request.body, function(err, dbResult) {  //testttu myös pelkkä savingsmode
     if (err) {
       response.json(err);
     } else {

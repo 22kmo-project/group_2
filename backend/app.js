@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // SUOJAAMATON OSUUS
 app.use('/login', loginRouter);
-app.use(authenticateToken);
+//app.use(authenticateToken);
 
 //############SUOJATTU OSUUS##############
 app.use('/', indexRouter);

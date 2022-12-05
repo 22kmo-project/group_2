@@ -14,6 +14,7 @@ const card = require('../models/card_model');
         })
     });
 
+
 router.get('/:id?',
     function (request, response) {
         card.getById(request.id, function (err, dbResult) {

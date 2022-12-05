@@ -5,6 +5,7 @@ const card = require('../models/card_model');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
+
 router.post('/', 
   function(request, response) {
     if(request.body.cardnumber && request.body.password){
@@ -14,7 +15,7 @@ router.post('/',
           if(dbError){
             if (dbError.errno = -4078){   // JOS DATABASE NURIN
               console.log("database offline");
-              response.send(false);
+              response.send("offline");
             }
             else
             response.json(dbError.errno);
@@ -30,14 +31,14 @@ router.post('/',
                 }
                 else {
                     console.log("Wrong password");
-                    response.send(false);
+                    response.send("Wrong password");
                 }			
               }
               );
             }
             else{
               console.log("Card does not exists");
-              response.send(false);
+              response.send("No card");
             }
           }
           }
@@ -46,7 +47,7 @@ router.post('/',
     else{
 
       console.log("Cardnumber or password missing");
-      response.send(false);
+      response.send("Missing info");
     }
   }
 );

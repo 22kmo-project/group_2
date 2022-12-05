@@ -37,6 +37,16 @@ function(request, response) {
   });
 });
 
+router.post('/fname', 
+function(request, response) {
+  owner.fname(request.body, function(err, dbResult) {
+    if (err) {
+      response.json(err);
+    } else {
+      response.json(dbResult[0]);
+    }
+  });
+});
 
 router.delete('/:id', 
 function(request, response) {

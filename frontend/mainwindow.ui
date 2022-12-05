@@ -9,26 +9,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>1280</width>
+    <height>720</height>
    </rect>
-  </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>400</width>
-    <height>300</height>
+    <width>1280</width>
+    <height>720</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>400</width>
-    <height>300</height>
+    <width>1280</width>
+    <height>720</height>
    </size>
   </property>
   <property name="baseSize">
@@ -44,11 +38,17 @@
    <widget class="QLabel" name="label_cardnumber">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>20</y>
+      <x>320</x>
+      <y>230</y>
       <width>171</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Century Gothic</family>
+      <pointsize>14</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Cardnumber</string>
@@ -57,11 +57,17 @@
    <widget class="QLabel" name="label_password">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>110</y>
+      <x>320</x>
+      <y>330</y>
       <width>171</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Century Gothic</family>
+      <pointsize>14</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Password</string>
@@ -70,9 +76,9 @@
    <widget class="QLineEdit" name="lineEdit_cardnum">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>60</y>
-      <width>171</width>
+      <x>320</x>
+      <y>280</y>
+      <width>231</width>
       <height>51</height>
      </rect>
     </property>
@@ -80,20 +86,20 @@
    <widget class="QLineEdit" name="lineEdit_password">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>150</y>
-      <width>171</width>
-      <height>61</height>
+      <x>320</x>
+      <y>380</y>
+      <width>231</width>
+      <height>51</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="btn_login">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>100</y>
-      <width>101</width>
-      <height>51</height>
+      <x>830</x>
+      <y>460</y>
+      <width>240</width>
+      <height>90</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -102,6 +108,13 @@
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
+    <property name="font">
+     <font>
+      <family>Century Gothic</family>
+      <pointsize>14</pointsize>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="text">
      <string>LOGIN</string>
     </property>
@@ -109,14 +122,39 @@
    <widget class="QLabel" name="label_loginresponse">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>170</y>
-      <width>161</width>
+      <x>580</x>
+      <y>320</y>
+      <width>421</width>
       <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Century Gothic</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_greeting">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>130</y>
+      <width>681</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Century Gothic</family>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Welcome</string>
     </property>
    </widget>
   </widget>
@@ -125,7 +163,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>1280</width>
      <height>21</height>
     </rect>
    </property>

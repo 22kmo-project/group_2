@@ -6,8 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-
+    ui->lineEdit_password->setEchoMode(QLineEdit::Password);   // Salasana kenttään tulee vain palloja
+    ui->label_greeting->setText("Welcome to Group_2 ATM, please log in");
 
 }
 
@@ -16,6 +16,15 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::cleartextsanddata()
+{
+ ui->lineEdit_cardnum->clear();
+ ui->lineEdit_password->clear();
+ui->label_loginresponse->setText(" ");
+cardnumber="";
+password="";
+token="";
+}
 
 void MainWindow::on_btn_login_clicked()
 {
@@ -24,17 +33,14 @@ void MainWindow::on_btn_login_clicked()
     password = ui->lineEdit_password->text();
     qDebug()<<cardnumber + " " + password;
     if(cardnumber.length()<3){
-        ui->label_loginresponse->setText("Please enter a valid cardnumber");
-        ui->lineEdit_cardnum->clear();
-        ui->lineEdit_password->clear();
+        ui->label_loginresponse->setText("Check cardnumber");
+        cleartextsanddata();
     }
     else if (password.length()<1){
-        ui->label_loginresponse->setText("Please enter a valid password");
-        ui->lineEdit_cardnum->clear();
-        ui->lineEdit_password->clear();
+        ui->label_loginresponse->setText("Check password");
+        cleartextsanddata();
     }
     else {
-
     QJsonObject jsonObj;
     jsonObj.insert("cardnumber",cardnumber);
     jsonObj.insert("password",password);
@@ -57,19 +63,19 @@ void MainWindow::loginSlot(QNetworkReply *reply)
     token = response_data;
         qDebug()<<"Token on " + token;
         ui->label_loginresponse->setText("Login succesful, opening menu...");          
-         // mainmenu = new MainMenu(token, cardnumber); kokeilu tehdä sessionin construktorissa
-        sessio = new session(token, cardnumber);
-        // mainmenu->show();
-        //this->close();  ehkä myös delete this, mieti toteutusta
+        emit login(cardnumber,token);
         reply->deleteLater();
         loginManager->deleteLater();
+        this->hide();
     }
     else {
         qDebug()<< response_data;
         ui->label_loginresponse->setText(response_data);
     }
-
-
 }
+
+
+
+
 
 

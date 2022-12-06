@@ -9,37 +9,43 @@ DebitWindow::DebitWindow(QString givenToken, int idcard,QWidget *parent) :
 {
     //AJASTIN
     connect(timer10sek,SIGNAL(timeout()),this,SLOT(timer10Slot()));
-    timer10sek->start(1000);
     ui->setupUi(this);
     id_card = idcard;
     token = givenToken;
 
+}
+
+DebitWindow::~DebitWindow()
+{
+    delete ui;
+}
+
+void DebitWindow::getbalance()
+{
     //HAKEE TILIN SALDON
-    QString site_url="http://localhost:3000/account/account_balance";
+    QString site_url="http://localhost:3000/account/"+QString::number(id_card);
     QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
     QByteArray myToken="Bearer "+token.toLocal8Bit();
     request.setRawHeader(QByteArray("Authorization"),(myToken));
     //WEBTOKEN LOPPU
     getBalanceManager = new QNetworkAccessManager(this);
-
-    QJsonObject jsonObj;  // objekti jonka sisälle dbrequestiin lähtevä data
-    jsonObj.insert("id_card",id_card);
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
     connect(getBalanceManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(getBalanceSlot(QNetworkReply*)));
-    reply = getBalanceManager->post(request, QJsonDocument(jsonObj).toJson());
+    reply = getBalanceManager->get(request);
+}
 
+void DebitWindow::getowner()
+{
     //HAKEE TILINOMISTAJAN TIEDOT
-    QString site_url2="http://localhost:3000/owner/fname"; //mites sukunimi??
-    QNetworkRequest request2((site_url));
+    QString site_url="http://localhost:3000/owner/fname"; //mites sukunimi??
+    QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
-    QByteArray myToken2="Bearer "+token.toLocal8Bit();
+    QByteArray myToken="Bearer "+token.toLocal8Bit();
     request.setRawHeader(QByteArray("Authorization"),(myToken));
     //WEBTOKEN LOPPU
     getOwnerInfoManager = new QNetworkAccessManager(this);
 
-    QJsonObject jsonObj2;  // objekti jonka sisälle dbrequestiin lähtevä data
+    QJsonObject jsonObj;  // objekti jonka sisälle dbrequestiin lähtevä data
     jsonObj.insert("id_card",id_card);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
@@ -47,9 +53,29 @@ DebitWindow::DebitWindow(QString givenToken, int idcard,QWidget *parent) :
     reply = getOwnerInfoManager->post(request, QJsonDocument(jsonObj).toJson());
 }
 
-DebitWindow::~DebitWindow()
+void DebitWindow::withdraw(int amount)
 {
-    delete ui;
+    //HAKEE DEBITBALANCEN
+    QString site_url="http://localhost:3000/card/debitwithdraw";
+    QNetworkRequest request((site_url));
+    //WEBTOKEN ALKU
+    QByteArray myToken="Bearer "+token.toLocal8Bit();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
+    //WEBTOKEN LOPPU
+
+    QJsonObject jsonObj;
+    jsonObj.insert("id_card", id_card);
+    jsonObj.insert("amount", amount);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    debitWithdrawManager = new QNetworkAccessManager(this);
+    connect(debitWithdrawManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(debitWithdrawSlot(QNetworkReply*)));
+    reply = debitWithdrawManager->get(request);
+}
+
+void DebitWindow::startwindowtimer()
+{
+    timer10sek->start(1000);
 }
 
 void DebitWindow::getBalanceSlot(QNetworkReply *reply)
@@ -60,77 +86,107 @@ void DebitWindow::getBalanceSlot(QNetworkReply *reply)
     QJsonDocument json_doc = QJsonDocument::fromJson(account_balance_data);
     QJsonObject json_obj = json_doc.object();
     QString balancedata;
-    balancedata=json_obj["balance"].toString();
-    qDebug()<<"Kortin saldo on  " <<balancedata;
+    int balance;
+    balancedata=QString::number(json_obj["account_balance"].toInt());
+    balance=balancedata.toInt();
+    qDebug()<<"Kortin saldo on  " <<balance;
 
-    ui->label_balance->setText("Your account balance is: "+ balancedata+ "");
+    ui->label_balance->setText("Your account balance is: "+ QString::number(balance));
+    getowner();
 }
 
-void DebitWindow::getOwnerInfoSlot(QNetworkReply *reply2)
+void DebitWindow::getOwnerInfoSlot(QNetworkReply *reply)
 {
     owner_data=reply->readAll();
     qDebug()<<"DATA : "+owner_data;
 
     QJsonDocument json_doc = QJsonDocument::fromJson(owner_data);
-    QJsonObject json_obj2 = json_doc.object();
+    QJsonObject json_obj = json_doc.object();
     QString ownerdata;
-    ownerdata=json_obj2["info"].toString();
+    ownerdata=json_obj["fname"].toString();
     qDebug()<<"Tilinomistaja on  " <<ownerdata;
 
     ui->label_info->setText("Account owner is: "+ ownerdata+ "");
 }
 
+void DebitWindow::debitWithdrawSlot(QNetworkReply *reply)
+{
+    debit_withdraw_data=reply->readAll();
+    qDebug()<<"DATA : "+debit_withdraw_data;
+    QJsonDocument json_doc = QJsonDocument::fromJson(debit_withdraw_data);
+    QJsonObject json_obj = json_doc.object();
+    int withdrawdata;
+    withdrawdata=json_obj["affectedRows"].toInt();
+    if(withdrawdata>0){
+        timer10sek->stop();
+        emit nextwindow(6);
+        this->close();
+    }
+    if(withdrawdata==0){
+        time10=0;
+        emit resettimer30();
+        ui->error_label->setText("Insufficient funds");
+
+    }
+}
+
 void DebitWindow::on_btn20_clicked()
 {
-    timer10sek->stop();
-    emit nextwindow(1);
+    time10=0;
+    emit resettimer30();
+    withdraw(20);
     this->close();
 }
 
 
 void DebitWindow::on_btn40_clicked()
 {
-    timer10sek->stop();
-    emit nextwindow(1);
+    time10=0;
+    emit resettimer30();
+    withdraw(40);
     this->close();
 }
 
 
 void DebitWindow::on_btn60_clicked()
 {
-    timer10sek->stop();
-    emit nextwindow(1);
+    time10=0;
+    emit resettimer30();
+    withdraw(60);
     this->close();
 }
 
 
 void DebitWindow::on_btn100_clicked()
 {
-    timer10sek->stop();
-    emit nextwindow(1);
+    time10=0;
+    emit resettimer30();
+    withdraw(100);
     this->close();
 }
 
 
 void DebitWindow::on_btn200_clicked()
 {
-    timer10sek->stop();
-    emit nextwindow(1);
+    time10=0;
+    emit resettimer30();
+    withdraw(200);
     this->close();
 }
 
 
 void DebitWindow::on_btn500_clicked()
 {
-    timer10sek->stop();
-    emit nextwindow(1);
+    time10=0;
+    emit resettimer30();
+    withdraw(500);
     this->close();
 }
 
 
 void DebitWindow::on_btnBack_clicked()
 {
-    timer10sek->stop();
+    time10=0;
     emit backtomainmenu();
     this->close();
 }
@@ -144,4 +200,6 @@ void DebitWindow::timer10Slot()
         this->close();
     }
 }
+
+
 

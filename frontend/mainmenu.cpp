@@ -11,6 +11,7 @@ MainMenu::MainMenu(QString t,int idcard, QWidget *parent) :
     token = t;
     id_card = idcard;
 
+
     // HAE OWNERIN NIMI TERVEHDYKSEEN
     QString site_url="http://localhost:3000/owner/fname";
     QNetworkRequest request((site_url));
@@ -47,6 +48,12 @@ void MainMenu::cleardata()
 void MainMenu::updateTimeUi(int time)
 {
     ui->label_sessiontime->setText("Session will end in "+QString::number(30-time) + " sec");
+}
+
+void MainMenu::setFonts()
+{
+    QFont h1("Century Gothic",24,QFont::Bold);
+
 }
 
 void MainMenu::on_btn_debit_withdraw_clicked()
@@ -89,6 +96,14 @@ void MainMenu::on_btn_debit_settings_clicked()
 {
     resetAllTimers();
     emit nextwindow(3);
+    this->hide();
+}
+
+
+void MainMenu::on_btn_debit_balance_clicked()
+{
+    resetAllTimers();
+    emit nextwindow(4);
     this->hide();
 }
 

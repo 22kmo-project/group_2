@@ -22,6 +22,7 @@ public:
     void resetAllTimers();
     void cleardata();
     void updateTimeUi(int);
+    void setFonts();
 
 signals:
     void resettimer30();
@@ -43,6 +44,7 @@ private slots:
     void on_btn_logout_clicked();
     void getfnameSlot(QNetworkReply *reply);
     void on_btn_debit_settings_clicked();
+    void on_btn_debit_balance_clicked();
 };
 
 #endif // MAINMENU_H

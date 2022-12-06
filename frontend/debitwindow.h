@@ -20,6 +20,10 @@ public:
     ~DebitWindow();
 
     void resetAllTimers();
+    void getbalance();
+    void getowner();
+    void withdraw(int amount);
+    void startwindowtimer();
 
 private slots:
     void on_btn20_clicked();
@@ -29,9 +33,12 @@ private slots:
     void on_btn200_clicked();
     void on_btn500_clicked();
     void on_btnBack_clicked();
+    void on_pushButton_clicked();
+    void on_btnOther_clicked();
     void timer10Slot();
-    void getOwnerInfoSlot(QNetworkReply *reply2);
+    void getOwnerInfoSlot(QNetworkReply *reply);
     void getBalanceSlot(QNetworkReply *reply);
+    void debitWithdrawSlot(QNetworkReply* reply);
 
 
 signals:
@@ -48,12 +55,12 @@ private:
     int time10=0;
 
     QNetworkAccessManager *getOwnerInfoManager;
-    QNetworkReply *reply2;
-    QByteArray owner_data;
-
-    QNetworkAccessManager *getBalanceManager;
     QNetworkReply *reply;
+    QByteArray owner_data;
+    QNetworkAccessManager *getBalanceManager;
     QByteArray account_balance_data;
+    QNetworkAccessManager *debitWithdrawManager;
+    QByteArray debit_withdraw_data;
 };
 
 #endif // DEBITWINDOW_H

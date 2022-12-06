@@ -6,6 +6,7 @@
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
 #include <QTimer>
+#include <QFont>
 // ---SESSION TÄYTYY INCLUDE JOKAINEN IKKUNA.H
 #include "mainmenu.h"
 #include "mainmenucredit.h"
@@ -13,6 +14,8 @@
 #include "transactions.h"
 #include "savings.h"
 #include "debitwindow.h"
+
+
 
 
 class session : public QObject
@@ -23,7 +26,8 @@ public:
     ~session();// TÄMÄ OLIO SAA LOGINWINDOWILTA (MAINWINDOW)
     void getidcard();               // QSTRING TOKENIN JA QSTRING CARDNUMBERIN
     void getandcheckcredit();       // HAKEE NIILLÄ VÄLITTÖMÄSTI ID_CARD JA CREDIT TIEDOT
-
+    void createWindows();  // Luo kaikki mainmenun jälkeiset ikkunat, laita tänne "ikkunannimi" = new "ikkunasi"
+    void deleteWindows(); // Poistaa kaikki em. ikkunat, laita tänne delete "ikkunannimi"
 private:
     QString sessiontoken;           // MÄÄRITÄ jokainen ikkuna olio ottamaan vastaan QString ja int
     QString sessioncardnumber;      // VÄLITÄ aina luodessa sessiontoken ja id_card
@@ -31,6 +35,7 @@ private:
     int credit;
     int timer30=0;
     void logout();   // ISTUNNON POISTO
+    void setFontsToUI();
 
 
     // -------NETWORK POINTTERIT JA MUUTTUJAT
@@ -46,7 +51,7 @@ private:
     Transactions * transactions;
     savings * saving;
     DebitWindow * debitwindow;
-
+    Debitbalance * debitbalance;
     // -------AJASTIMET--------------
     QTimer * session30timer;
 signals:

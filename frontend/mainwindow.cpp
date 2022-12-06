@@ -6,7 +6,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->lineEdit_password->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_password->setEchoMode(QLineEdit::Password);   // Salasana kenttään tulee vain palloja
+    ui->label_greeting->setText("Welcome to Group_2 ATM, please log in");
+    pingServer();
 
 }
 
@@ -25,6 +27,19 @@ password="";
 token="";
 }
 
+void MainWindow::pingServer()  // tekee get reguestin lukittuun osaan db:tä, tarkistaa onko db päällä
+{
+    QString site_url="http://localhost:3000/card/1";
+    QNetworkRequest request((site_url));
+
+    pingmanager = new QNetworkAccessManager(this);
+
+    connect(pingmanager, SIGNAL(finished (QNetworkReply*)), this, SLOT(pingSlot(QNetworkReply*)));
+
+    reply = pingmanager->get(request);
+
+}
+
 
 
 void MainWindow::on_btn_login_clicked()
@@ -34,11 +49,11 @@ void MainWindow::on_btn_login_clicked()
     password = ui->lineEdit_password->text();
     qDebug()<<cardnumber + " " + password;
     if(cardnumber.length()<3){
-        ui->label_loginresponse->setText("Please enter a valid cardnumber");
+        ui->label_loginresponse->setText("Check cardnumber");
         cleartextsanddata();
     }
     else if (password.length()<1){
-        ui->label_loginresponse->setText("Please enter a valid password");
+        ui->label_loginresponse->setText("Check password");
         cleartextsanddata();
     }
     else {
@@ -64,11 +79,7 @@ void MainWindow::loginSlot(QNetworkReply *reply)
     if (response_data.length() > 20 && response_data != "false"){
     token = response_data;
         qDebug()<<"Token on " + token;
-        ui->label_loginresponse->setText("Login succesful, opening menu...");          
-         // mainmenu = new MainMenu(token, cardnumber); kokeilu tehdä sessionin construktorissa
-       // sessio = new session(token, cardnumber);  ----------------------------------------------------------------------------------------
-        // mainmenu->show();
-        //this->close();  ehkä myös delete this, mieti toteutusta
+        ui->label_loginresponse->setText("Login succesful, opening menu...");
         emit login(cardnumber,token);
         reply->deleteLater();
         loginManager->deleteLater();
@@ -82,6 +93,20 @@ void MainWindow::loginSlot(QNetworkReply *reply)
 
 }
 
+void MainWindow::pingSlot(QNetworkReply *reply)
+{
+    response_data=reply->readAll();
+     qDebug()<<"DATA : "+response_data;
+     if(response_data=="Unauthorized"){
+         ui->label_greeting->setText("Welcome to Group_2 ATM, please log in");
+         reply->deleteLater();
+         pingmanager->deleteLater();
+     }
+     if(response_data!="Unauthorized"){
+         ui->label_greeting->setText("Error: Rest Api is offline");
+         reply->deleteLater();
+         pingmanager->deleteLater();
+     }
 
-
+}
 

@@ -25,6 +25,7 @@ public:
     QString password;
     QString token;
     void cleartextsanddata();
+    void pingServer();
 signals:
     void reset30timer();
     void login(QString,QString);
@@ -32,12 +33,13 @@ signals:
 private slots:
     void on_btn_login_clicked();
     void loginSlot (QNetworkReply *reply);   // loginiin
-
+    void pingSlot(QNetworkReply * reply);  // pingiin
 private:
     Ui::MainWindow *ui;
 
     MainMenu * mainmenu;
     QNetworkAccessManager * loginManager;// loginia varten
+    QNetworkAccessManager * pingmanager;
     QNetworkReply *reply;
     QByteArray response_data;
 

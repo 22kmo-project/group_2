@@ -61,6 +61,17 @@ function(request, response) {
   });
 });
 
+router.post('/debitwithdraw', 
+function(request, response) {
+  card.debitwithdraw(request.body, function(err, dbResult) {
+    if (err) {
+      response.json(err);
+    } else {
+      console.log(dbResult);
+      response.json(dbResult);
+    }
+  });
+});
 
 router.delete('/:id', 
 function(request, response) {

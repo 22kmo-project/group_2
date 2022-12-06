@@ -20,6 +20,13 @@ const card = {
     }); // tieto lähtee arrayna
   },
 
+  debitwithdraw: function(withdraw, callback) {
+    return db.query(
+      'call debit_withdraw(?,?)',
+      [withdraw.id_card, withdraw.amount],
+      callback);
+    },
+
   getcardid: function(get_cardid, callback) {
     return db.query(
       'select id_card from card where cardnumber = ?',

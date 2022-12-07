@@ -25,12 +25,33 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+    background-color: qlineargradient(spread:pad, x1:0.46, y1:0, x2:0.472, y2:1, stop:0 rgba(0, 20, 15, 255), stop:1 rgba(17, 73, 74, 255));
+    color: #c9bfb6;
+}
+QPushButton{
+    background-color: qlineargradient(spread:pad, x1:0.494, y1:0, x2:0.517, y2:1, stop:0 rgba(36, 39, 43, 255), stop:1 rgba(72, 74, 78, 255));
+    border:0px solid black;
+    border-radius: 12px;
+    color: #c9bfb6;
+    font-size: 14px;
+}
+QLabel{
+    background-color: transparent;
+}
+QLineEdit{
+    border: 1px solid #c9bfb6;
+    padding: 8px;
+    color: #c9bfb6;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="btn20">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>200</y>
+      <x>290</x>
+      <y>140</y>
       <width>240</width>
       <height>90</height>
      </rect>
@@ -50,7 +71,7 @@
     <property name="font">
      <font>
       <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <pointsize>-1</pointsize>
      </font>
     </property>
     <property name="text">
@@ -60,8 +81,8 @@
    <widget class="QPushButton" name="btn40">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>330</y>
+      <x>290</x>
+      <y>270</y>
       <width>240</width>
       <height>90</height>
      </rect>
@@ -69,7 +90,7 @@
     <property name="font">
      <font>
       <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <pointsize>-1</pointsize>
      </font>
     </property>
     <property name="text">
@@ -79,8 +100,8 @@
    <widget class="QPushButton" name="btn60">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>460</y>
+      <x>290</x>
+      <y>400</y>
       <width>240</width>
       <height>90</height>
      </rect>
@@ -88,7 +109,7 @@
     <property name="font">
      <font>
       <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <pointsize>-1</pointsize>
      </font>
     </property>
     <property name="text">
@@ -98,8 +119,8 @@
    <widget class="QPushButton" name="btn100">
     <property name="geometry">
      <rect>
-      <x>840</x>
-      <y>200</y>
+      <x>770</x>
+      <y>140</y>
       <width>240</width>
       <height>90</height>
      </rect>
@@ -107,7 +128,7 @@
     <property name="font">
      <font>
       <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <pointsize>-1</pointsize>
      </font>
     </property>
     <property name="text">
@@ -117,8 +138,8 @@
    <widget class="QPushButton" name="btn200">
     <property name="geometry">
      <rect>
-      <x>840</x>
-      <y>330</y>
+      <x>770</x>
+      <y>270</y>
       <width>240</width>
       <height>90</height>
      </rect>
@@ -126,7 +147,7 @@
     <property name="font">
      <font>
       <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <pointsize>-1</pointsize>
      </font>
     </property>
     <property name="text">
@@ -136,8 +157,8 @@
    <widget class="QPushButton" name="btn500">
     <property name="geometry">
      <rect>
-      <x>840</x>
-      <y>460</y>
+      <x>770</x>
+      <y>400</y>
       <width>240</width>
       <height>90</height>
      </rect>
@@ -145,7 +166,7 @@
     <property name="font">
      <font>
       <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <pointsize>-1</pointsize>
      </font>
     </property>
     <property name="text">
@@ -155,8 +176,8 @@
    <widget class="QLabel" name="txtSelect">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>80</y>
+      <x>570</x>
+      <y>40</y>
       <width>481</width>
       <height>71</height>
      </rect>
@@ -183,7 +204,7 @@
     <property name="font">
      <font>
       <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <pointsize>-1</pointsize>
      </font>
     </property>
     <property name="text">
@@ -231,8 +252,8 @@
    <widget class="QPushButton" name="btnOther">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>580</y>
+      <x>770</x>
+      <y>530</y>
       <width>240</width>
       <height>90</height>
      </rect>
@@ -240,24 +261,43 @@
     <property name="font">
      <font>
       <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <pointsize>-1</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>Other amount</string>
+     <string>Withdraw other amount</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_error">
     <property name="geometry">
      <rect>
       <x>920</x>
-      <y>610</y>
+      <y>620</y>
       <width>351</width>
-      <height>61</height>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Century Gothic</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_other">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>530</y>
+      <width>240</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: transparent;</string>
     </property>
    </widget>
   </widget>

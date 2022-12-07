@@ -35,14 +35,16 @@ private slots:
 signals:
     void backtomainmenu();
     void resetTimer30();
+    void logoutsignal();
 
 private:
     QTimer * timer10sek = new QTimer;
     Ui::Transactions *ui;
 
     void getTransactions();
-    void setTransactionsView();
+
     void TokenEditor(QJsonDocument);
+    QString parseDate(QString);
 
     QString token;
     int id_card;

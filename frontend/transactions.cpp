@@ -77,7 +77,7 @@ void Transactions::timer10Slot()
 void Transactions::timerReset()
 {
     time10 = 0;
-    emit resettimer30();
+    emit resetTimer30();
 }
 
 void Transactions::setTransactionsView()
@@ -113,21 +113,20 @@ void Transactions::TokenEditor(QJsonDocument doc) //Ottaa vastaan QJsonDocumenti
         rearrangedDate= "";
         dateHolder = json_obj["log_time"].toString();  //Pilkotaan log_time päivämäärään ja aikaan koska muoto on 2022-11-30T19:34:43.000Z
         splittedDateTime = dateHolder.split("T");  //["2022-11-30","19:34:43.000Z"]
-        splittedYearMonthDay = splittedDateTime[0].split("-");
-        for(int i=splittedYearMonthDay.length()-1; i>=0;i--){
+        splittedYearMonthDay = splittedDateTime[0].split("-"); //["2022", "11", "30"]
+        for(int i=splittedYearMonthDay.length()-1; i>=0;i--){ //kääntää ympäri["30", "11", "2022"]
             rearrangedDate.append(splittedYearMonthDay[i]);
             if(i!=0){
-                rearrangedDate.append(".");
+                rearrangedDate.append(".");     //"30.11.2022"
             }
         }
-        //date = new QTableWidgetItem(splittedDateTime[0]);//["2022-11-30"]
-        date = new QTableWidgetItem(rearrangedDate);
+        date = new QTableWidgetItem(rearrangedDate); //"30.11.2022"
         timeHolder = splittedDateTime[1].split(".")[0];  //["19:34:43", "000Z"]Otetaan ajasta pelkät tunnit/minuutit/sekunnit pilkkomalla pisteen kohdalta ja ottamalla sen uuden arrayn ensimmäinen osa
         time = new QTableWidgetItem(timeHolder); //["19:34:43"]
 
         logString = json_obj["log"].toString();
         type = new QTableWidgetItem(logString);
-        if(logString=="Debit withdraw" || logString=="Credit withdraw"){  //Tarkistetaan oliko transactionin tyyppi Debit/credit withdraw ja muutetaan määrä negatiiviseksi jos oli
+        if(logString=="Debit withdraw" || logString=="Credit withdraw" || logString=="Savingmode on, sent to designated savings acc"){  //Tarkistetaan oliko transactionin tyyppi Debit/credit withdraw ja muutetaan määrä negatiiviseksi jos oli
             amount = new QTableWidgetItem("-" + QString::number(json_obj["amount"].toInt()) + "€" );
         }else{
             amount = new QTableWidgetItem(QString::number(json_obj["amount"].toInt()) + "€");

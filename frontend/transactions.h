@@ -34,7 +34,7 @@ private slots:
 
 signals:
     void backtomainmenu();
-    void resettimer30();
+    void resetTimer30();
 
 private:
     QTimer * timer10sek = new QTimer;

@@ -21,7 +21,8 @@ class session : public QObject
 public:
     session();   // TÄMÄ OLIO SAA LOGINWINDOWILTA (MAINWINDOW)
     void getidcard();               // QSTRING TOKENIN JA QSTRING CARDNUMBERIN
-    void getandcheckcredit();       // HAKEE NIILLÄ VÄLITTÖMÄSTI ID_CARD JA CREDIT TIEDOT
+    void getandcheckcredit();
+    void deleteWindows(); // Poistaa kaikki em. ikkunat, laita tänne delete "ikkunannimi"// HAKEE NIILLÄ VÄLITTÖMÄSTI ID_CARD JA CREDIT TIEDOT
 
 private:
     QString sessiontoken;           // MÄÄRITÄ jokainen ikkuna olio ottamaan vastaan QString ja int
@@ -49,6 +50,7 @@ private:
     // -------AJASTIMET--------------
     QTimer * session30timer;
 signals:
+     void resettimer30();
 private slots:
    // ----SLOTIT JOIHIN TULEE SIGNAALI/VASTAUS QNETWORKACCESSMANAGEREILTA-----
     void getCardIDSlot (QNetworkReply *reply); // KUTSUU getandcheckcredit() saatuaan id_card

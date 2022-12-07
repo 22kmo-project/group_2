@@ -178,7 +178,3 @@ void session::backtomainmenu()   // 10 sek päättymisen signaalislotti, avaa cr
         creditmenu->show();
     }
 }
-
-
-
-

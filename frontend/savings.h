@@ -22,6 +22,7 @@ public:
     QString savingsUpdate;
     QString savingsOff;
 
+
 private slots:
 
 
@@ -33,21 +34,30 @@ private slots:
 
     void on_btn_logout_clicked();
 
-    void savingsSlot(QNetworkReply *reply);
+    void updateSavingsSlot(QNetworkReply *reply);
+
+    void getSavingsSlot(QNetworkReply *reply);
 
     void on_btn_save_savings_clicked();
+
+    void on_btn_Back_clicked();
 
 signals:
     void backtomainmenu();
 
 
 private:
-    void postsavings();
+    void updateSavings();
     Ui::savings *ui;
     QTimer * timer10sek = new QTimer;
     QString token;
+    int saving;
     int id_card;
     int time10=0;
+
+    QByteArray savingsmode_data;
+
+    QNetworkAccessManager *getSavingsManager;
 
     QNetworkAccessManager *savingsManager; //!!!
 

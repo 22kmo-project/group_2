@@ -14,6 +14,7 @@ const logs = {
       callback
     ); // tieto lähtee arrayna
   },
+
   delete: function(id, callback) {
     return db.query('delete from logs where id_logs=?', [id], callback);
   },

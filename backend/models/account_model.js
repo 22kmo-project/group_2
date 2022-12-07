@@ -14,6 +14,14 @@ const account = {
       callback
     );
   },
+  getsavingsmode: function(id,callback) { // FRONTIN SAVINGS TARKASTUSTA VARTEN
+    return db.query(
+      'select savingsmode from account where id_card = ?',
+      [id], callback
+    );
+    
+   },
+   
   add: function(add_account, callback) {
     return db.query(
       'call make_card_account(?)',

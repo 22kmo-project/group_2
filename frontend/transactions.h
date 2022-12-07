@@ -6,6 +6,8 @@
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
 #include <QTimer>
+#include <QTableWidget>
+
 
 namespace Ui {
 class Transactions;
@@ -19,6 +21,7 @@ public:
     explicit Transactions(QString, int, QWidget *parent = nullptr);
     ~Transactions();
 
+
 private slots:
     void on_btn_Back_clicked();
 
@@ -30,13 +33,16 @@ private slots:
 
 signals:
     void backtomainmenu();
+    void resetTimer30();
 
 private:
+    QTimer * timer10sek = new QTimer;
+    Ui::Transactions *ui;
+
     void getTransactions();
     void setTransactionsView();
-    QTimer * timer10sek = new QTimer;
+    void TokenEditor(QJsonDocument);
 
-    Ui::Transactions *ui;
     QString token;
     int id_card;
     int time10=0;
@@ -44,7 +50,6 @@ private:
     QNetworkAccessManager *logsManager;
     QNetworkReply *reply;
     QByteArray response_data;
-
 };
 
 #endif // TRANSACTIONS_H

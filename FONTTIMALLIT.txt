@@ -1,0 +1,10 @@
+IKKUNAKOKO 1280x720;
+
+Fontti Century Gothic
+H1 	24
+H2 "esim cardnumber" - 14
+Infoteksti - 10
+Nappifontti - 14
+
+
+napin koko 240 x 90

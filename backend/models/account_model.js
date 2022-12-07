@@ -9,7 +9,7 @@ const account = {
   },
   update_savingsmode: function( update, callback) { //testi
     return db.query(
-      'call update_savingsmode(?,?)' , //kokeiltu myös select ja pelkkä savingsmode
+      'call update_savingsmode(?,?)' , 
       [update.id_card, update.savings],
       callback
     );

@@ -61,7 +61,7 @@ void savings::on_btn_save_savings_clicked()
     //luetaan annettu nro, ja viedään tietokantaan ehtorakenteen kautta
 
     savingsUpdate =ui->lineEdit_savingsOn->text();
-    qDebug()<<"tulostuuko numero oikein "<<savingsUpdate;
+
     int savings=savingsUpdate.toInt();
 
     if  (savings <1 || savings >10){
@@ -95,7 +95,6 @@ void savings::on_btn_save_savings_clicked()
 void savings::updateSavingsSlot(QNetworkReply *reply)
 {
 
-    //tämä toimii!
     savingsUpdate_data=reply->readAll();
 
     QJsonDocument json_doc = QJsonDocument::fromJson(savingsUpdate_data);
@@ -103,7 +102,7 @@ void savings::updateSavingsSlot(QNetworkReply *reply)
     int updateSavings;
 
     updateSavings =json_obj["affectedRows"].toInt();
-    //updateSavings =savingsUpdate_data.toInt();
+
     if (updateSavings >0){
         qDebug()<<"Update result is: " <<updateSavings;
         ui->label_savingsresponse->setText("Savings mode is updated succesfully! ");
@@ -117,12 +116,14 @@ void savings::updateSavingsSlot(QNetworkReply *reply)
 }
 
 void savings::on_btn_savingsOff_clicked()
-{/*
-
+{
+    ui->lineEdit_savingsOn->clear();
     QJsonObject jsonObj;
-    jsonObj.insert("savingsmode",savingsmode);
+    jsonObj.insert("id_card",id_card);
+    jsonObj.insert("savings",0);
 
-    QString site_url = "http://localhost:3000/account/savingsmode" + QString::number(id_card);  //!!!
+
+    QString site_url = "http://localhost:3000/account/savingsmode";
     QNetworkRequest request((site_url));
 
             //webtoken alku
@@ -130,29 +131,23 @@ void savings::on_btn_savingsOff_clicked()
     request.setRawHeader(QByteArray("Authorization"), (myToken));
             //webtoken loppu
 
-
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     updateSavingsManager = new QNetworkAccessManager(this);
 
-    connect(updateSavingsManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateSavingsSlot(QNetworkReply*)));
+    connect(updateSavingsManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(savingsOffSlot(QNetworkReply*)));
     reply = updateSavingsManager->post(request, QJsonDocument(jsonObj).toJson());
-*/
+
+    ui->label_savingsresponse->setText("Savings mode is now: 0 ");
+
 }
 
-
-
-void savings::savingsOffSlot(QNetworkReply *reply)
+void savings::savingOffSlot(QNetworkReply *reply)
 {
-   /* savingsUpdate_data=reply->readAll();
-
-    QJsonDocument json_doc = QJsonDocument::fromJson(savingsUpdate_data);
-    QJsonObject json_obj = json_doc.object();
-
-    int savingsOff;
-    savingsOff =json_obj["affectedRows"].toInt();
-    qDebug()<<"Updated savings mode is: " <<savingsOff;*/
+    response_data=reply->readAll();
+    qDebug()<<response_data;
+    reply->deleteLater();
+    updateSavingsManager->deleteLater();
 }
-
 
 
 void savings::on_btn_logout_clicked()

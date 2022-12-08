@@ -29,13 +29,13 @@ private slots:
 
     void on_btn_savingsOff_clicked();
 
+    void savingOffSlot (QNetworkReply *reply);
+
     void timer10Slot();
 
     void getSavingsSlot(QNetworkReply *reply);
 
     void updateSavingsSlot(QNetworkReply *reply);
-
-    void savingsOffSlot(QNetworkReply *reply);
 
     void on_btn_save_savings_clicked();
 

@@ -6,7 +6,7 @@ const card = require('../models/account_model');
 
 router.get('/',
     function (request, response) {
-        card.getAll(function (err, dbResult) {
+        account.getAll(function (err, dbResult) {
             if (err) {
                 response.json(err);
             } else {
@@ -18,7 +18,7 @@ router.get('/',
 
 router.get('/:id?',
     function (request, response) {
-        card.getById(request.params.id, function (err, dbResult) {
+        account.getById(request.params.id, function (err, dbResult) {
             if (err) {
                 response.json(err);
             } else {
@@ -30,7 +30,7 @@ router.get('/:id?',
 
 router.post('/', 
 function(request, response) {
-  card.add(request.body, function(err, dbResult) {
+  account.add(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {
@@ -42,11 +42,11 @@ function(request, response) {
 
 router.post('/savingsmode',
 function(request, response) {
-  account.update_savingsmode(request.body, function(err, dbResult) {  //testttu myös pelkkä savingsmode
+  account.update_savingsmode(request.body, function(err, dbResult) {  
     if (err) {
       response.json(err);
     } else {
-      response.json(dbResult[0]);
+      response.json(dbResult);
     }
   });
 });

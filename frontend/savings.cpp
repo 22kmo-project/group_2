@@ -60,8 +60,11 @@ void savings::on_btn_save_savings_clicked()
 {
     //luetaan annettu nro, ja viedään tietokantaan ehtorakenteen kautta
 
-    savingsUpdate = ui->lineEdit_savingsOn->text();
-    if  (savingsUpdate <1 && savingsUpdate >10){
+    savingsUpdate =ui->lineEdit_savingsOn->text();
+    qDebug()<<"tulostuuko numero oikein "<<savingsUpdate;
+    int savings=savingsUpdate.toInt();
+
+    if  (savings <1 || savings >10){
 
         ui->label_savingsresponse->setText("Give number between 1-10");
     }
@@ -69,16 +72,17 @@ void savings::on_btn_save_savings_clicked()
     else {
 
         QJsonObject jsonObj;
-        jsonObj.insert("savingsmode",savingsmode);
+        jsonObj.insert("id_card",id_card);
+        jsonObj.insert("savings",savings);
 
-        QString site_url = "http://localhost:3000/account/savingsmode/" + QString::number(id_card);  //!!!
+
+        QString site_url = "http://localhost:3000/account/savingsmode";
         QNetworkRequest request((site_url));
 
                 //webtoken alku
         QByteArray myToken = "Bearer "+token.toLocal8Bit();
         request.setRawHeader(QByteArray("Authorization"), (myToken));
                 //webtoken loppu
-
 
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
         updateSavingsManager = new QNetworkAccessManager(this);
@@ -90,23 +94,31 @@ void savings::on_btn_save_savings_clicked()
 
 void savings::updateSavingsSlot(QNetworkReply *reply)
 {
+
+    //tämä toimii!
     savingsUpdate_data=reply->readAll();
 
     QJsonDocument json_doc = QJsonDocument::fromJson(savingsUpdate_data);
     QJsonObject json_obj = json_doc.object();
     int updateSavings;
 
-    updateSavings =json_obj["updateSavings"].toInt();
+    updateSavings =json_obj["affectedRows"].toInt();
     //updateSavings =savingsUpdate_data.toInt();
-    qDebug()<<"Updated savings mode is: " <<updateSavings;
-    ui->label_savingsresponse->setText("Savings mode is updated succesfully! "); //+QString::number(updateSavings));
+    if (updateSavings >0){
+        qDebug()<<"Update result is: " <<updateSavings;
+        ui->label_savingsresponse->setText("Savings mode is updated succesfully! ");
+    }
+
+    if(updateSavings==0){
+        ui->label_savingsresponse->setText("Could not update savingsmode");
+    }
+
 
 }
 
 void savings::on_btn_savingsOff_clicked()
 {/*
 
-   //manageri?
     QJsonObject jsonObj;
     jsonObj.insert("savingsmode",savingsmode);
 

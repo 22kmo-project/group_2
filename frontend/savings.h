@@ -53,8 +53,6 @@ private:
     QTimer * timer10sek = new QTimer;
     QString token;
     int saving;
-    //int savingsU;
-    //int savingsUpdate;
     int id_card;
     int time10=0;
 

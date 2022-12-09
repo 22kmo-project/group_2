@@ -19,8 +19,8 @@ public:
     explicit savings(QString, int, QWidget *parent = nullptr);
     ~savings();
 
-    QString savingsUpdate; //???
-    QString savingsOff;
+    QString savingsUpdate;
+    //QString savingsOff;
     QString savingsmode;
 
 
@@ -29,7 +29,7 @@ private slots:
 
     void on_btn_savingsOff_clicked();
 
-    void savingOffSlot (QNetworkReply *reply);
+    void savingsOffSlot (QNetworkReply *reply);
 
     void timer10Slot();
 
@@ -45,6 +45,7 @@ private slots:
 
 signals:
     void backtomainmenu();
+    void logout();
 
 
 private:

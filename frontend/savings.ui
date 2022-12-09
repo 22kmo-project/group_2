@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"> background-color: qlineargradient(spread:pad, x1:0.46, y1:0, x2:0.472, y2:1, stop:0 rgba(0, 20, 15, 255), stop:1 rgba(17, 73, 74, 255));
+    color: #c9bfb6;</string>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -28,15 +32,18 @@
      <pointsize>24</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true"> background-color: transparent;</string>
+   </property>
    <property name="text">
-    <string>Set savings:</string>
+    <string>SET SAVINGS:</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>150</y>
+     <x>170</x>
+     <y>140</y>
      <width>261</width>
      <height>61</height>
     </rect>
@@ -47,6 +54,9 @@
      <pointsize>14</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true"> background-color: transparent;</string>
+   </property>
    <property name="text">
     <string>How many percent?</string>
    </property>
@@ -54,8 +64,8 @@
   <widget class="QPushButton" name="btn_savingsOff">
    <property name="geometry">
     <rect>
-     <x>780</x>
-     <y>220</y>
+     <x>870</x>
+     <y>230</y>
      <width>240</width>
      <height>90</height>
     </rect>
@@ -63,8 +73,15 @@
    <property name="font">
     <font>
      <family>Century Gothic</family>
-     <pointsize>14</pointsize>
+     <pointsize>-1</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> background-color: qlineargradient(spread:pad, x1:0.494, y1:0, x2:0.517, y2:1, stop:0 rgba(36, 39, 43, 255), stop:1 rgba(72, 74, 78, 255));
+    border:0px solid black;
+    border-radius: 12px;
+    color: #c9bfb6;
+    font-size: 14px;</string>
    </property>
    <property name="text">
     <string>OFF</string>
@@ -73,8 +90,8 @@
   <widget class="QPushButton" name="btn_logout">
    <property name="geometry">
     <rect>
-     <x>1010</x>
-     <y>600</y>
+     <x>1000</x>
+     <y>590</y>
      <width>240</width>
      <height>90</height>
     </rect>
@@ -82,8 +99,15 @@
    <property name="font">
     <font>
      <family>Century Gothic</family>
-     <pointsize>14</pointsize>
+     <pointsize>-1</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> background-color: qlineargradient(spread:pad, x1:0.494, y1:0, x2:0.517, y2:1, stop:0 rgba(36, 39, 43, 255), stop:1 rgba(72, 74, 78, 255));
+    border:0px solid black;
+    border-radius: 12px;
+    color: #c9bfb6;
+    font-size: 14px;</string>
    </property>
    <property name="text">
     <string>LOGOUT</string>
@@ -92,18 +116,23 @@
   <widget class="QLineEdit" name="lineEdit_savingsOn">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>170</x>
      <y>230</y>
      <width>240</width>
      <height>90</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true"> border: 1px solid #c9bfb6;
+    padding: 8px;
+    color: #c9bfb6;</string>
+   </property>
   </widget>
   <widget class="QPushButton" name="btn_save_savings">
    <property name="geometry">
     <rect>
-     <x>480</x>
-     <y>440</y>
+     <x>170</x>
+     <y>420</y>
      <width>240</width>
      <height>90</height>
     </rect>
@@ -111,8 +140,15 @@
    <property name="font">
     <font>
      <family>Century Gothic</family>
-     <pointsize>14</pointsize>
+     <pointsize>-1</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> background-color: qlineargradient(spread:pad, x1:0.494, y1:0, x2:0.517, y2:1, stop:0 rgba(36, 39, 43, 255), stop:1 rgba(72, 74, 78, 255));
+    border:0px solid black;
+    border-radius: 12px;
+    color: #c9bfb6;
+    font-size: 14px;</string>
    </property>
    <property name="text">
     <string>SAVE</string>
@@ -121,8 +157,8 @@
   <widget class="QPushButton" name="btn_Back">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>600</y>
+     <x>50</x>
+     <y>590</y>
      <width>240</width>
      <height>90</height>
     </rect>
@@ -130,8 +166,15 @@
    <property name="font">
     <font>
      <family>Century Gothic</family>
-     <pointsize>14</pointsize>
+     <pointsize>-1</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> background-color: qlineargradient(spread:pad, x1:0.494, y1:0, x2:0.517, y2:1, stop:0 rgba(36, 39, 43, 255), stop:1 rgba(72, 74, 78, 255));
+    border:0px solid black;
+    border-radius: 12px;
+    color: #c9bfb6;
+    font-size: 14px;</string>
    </property>
    <property name="text">
     <string>BACK</string>
@@ -152,6 +195,9 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true"> background-color: transparent;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -159,9 +205,9 @@
   <widget class="QLabel" name="label_savingsresponse">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>360</y>
-     <width>391</width>
+     <x>70</x>
+     <y>350</y>
+     <width>481</width>
      <height>51</height>
     </rect>
    </property>
@@ -170,6 +216,31 @@
      <family>Century Gothic</family>
      <pointsize>10</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> background-color: transparent;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_savingsOff">
+   <property name="geometry">
+    <rect>
+     <x>810</x>
+     <y>350</y>
+     <width>411</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Century Gothic</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> background-color: transparent;</string>
    </property>
    <property name="text">
     <string/>

@@ -1,5 +1,6 @@
 #include "savings.h"
 #include "ui_savings.h"
+#include "session.h"
 #include <QDebug>
 #include <QByteArray>
 
@@ -104,8 +105,8 @@ void savings::updateSavingsSlot(QNetworkReply *reply)
     updateSavings =json_obj["affectedRows"].toInt();
 
     if (updateSavings >0){
-        qDebug()<<"Update result is: " <<updateSavings;
-        ui->label_savingsresponse->setText("Savings mode is updated succesfully! ");
+        qDebug()<<"Affected rows: " <<updateSavings;
+        ui->label_savingsresponse->setText("Savings mode is updated succesfully! You can log out. ");
     }
 
     if(updateSavings==0){
@@ -137,11 +138,11 @@ void savings::on_btn_savingsOff_clicked()
     connect(updateSavingsManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(savingsOffSlot(QNetworkReply*)));
     reply = updateSavingsManager->post(request, QJsonDocument(jsonObj).toJson());
 
-    ui->label_savingsresponse->setText("Savings mode is now: 0 ");
+   ui->label_savingsOff->setText("Savings mode is now: 0%, you can log out.");
 
 }
 
-void savings::savingOffSlot(QNetworkReply *reply)
+void savings::savingsOffSlot(QNetworkReply *reply)
 {
     response_data=reply->readAll();
     qDebug()<<response_data;
@@ -152,7 +153,7 @@ void savings::savingOffSlot(QNetworkReply *reply)
 
 void savings::on_btn_logout_clicked()
 {
-    qDebug()<<"logout";
+    emit logout();
 }
 
 
@@ -160,7 +161,6 @@ void savings::on_btn_logout_clicked()
 
 void savings::on_btn_Back_clicked()
 {
-    //emit resettimer30();
     timer10sek->stop();
     emit backtomainmenu();
     this->close();

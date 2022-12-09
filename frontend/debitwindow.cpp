@@ -53,29 +53,15 @@ void DebitWindow::getowner()
     reply = getOwnerInfoManager->post(request, QJsonDocument(jsonObj).toJson());
 }
 
-void DebitWindow::withdraw(int amount)
-{
-    //HAKEE DEBITBALANCEN
-    QString site_url="http://localhost:3000/card/debitwithdraw";
-    QNetworkRequest request((site_url));
-    //WEBTOKEN ALKU
-    QByteArray myToken="Bearer "+token.toLocal8Bit();
-    request.setRawHeader(QByteArray("Authorization"),(myToken));
-    //WEBTOKEN LOPPU
-
-    QJsonObject jsonObj;
-    jsonObj.insert("id_card", id_card);
-    jsonObj.insert("amount", amount);
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    debitWithdrawManager = new QNetworkAccessManager(this);
-    connect(debitWithdrawManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(debitWithdrawSlot(QNetworkReply*)));
-    reply = debitWithdrawManager->get(request);
-}
-
 void DebitWindow::startwindowtimer()
 {
     timer10sek->start(1000);
+}
+
+void DebitWindow::resets()
+{
+    time10=0;
+    emit resettimer30();
 }
 
 void DebitWindow::getBalanceSlot(QNetworkReply *reply)
@@ -93,20 +79,6 @@ void DebitWindow::getBalanceSlot(QNetworkReply *reply)
 
     ui->label_balance->setText("Your account balance is: "+ QString::number(balance));
     getowner();
-}
-
-void DebitWindow::getOwnerInfoSlot(QNetworkReply *reply)
-{
-    owner_data=reply->readAll();
-    qDebug()<<"DATA : "+owner_data;
-
-    QJsonDocument json_doc = QJsonDocument::fromJson(owner_data);
-    QJsonObject json_obj = json_doc.object();
-    QString ownerdata;
-    ownerdata=json_obj["fname"].toString();
-    qDebug()<<"Tilinomistaja on  " <<ownerdata;
-
-    ui->label_info->setText("Account owner is: "+ ownerdata+ "");
 }
 
 void DebitWindow::debitWithdrawSlot(QNetworkReply *reply)
@@ -130,63 +102,99 @@ void DebitWindow::debitWithdrawSlot(QNetworkReply *reply)
     }
 }
 
+void DebitWindow::customAmount(int amount)
+{
+    this->show();
+    resets();
+    withdraw(amount);
+}
+
+void DebitWindow::showUI()
+{
+    resets();
+    this->show();
+}
+
+void DebitWindow::withdraw(int amount)
+{
+    //HAKEE DEBITBALANCEN
+    QString site_url="http://localhost:3000/card/debitwithdraw";
+    QNetworkRequest request((site_url));
+    //WEBTOKEN ALKU
+    QByteArray myToken="Bearer "+token.toLocal8Bit();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
+    //WEBTOKEN LOPPU
+
+    QJsonObject jsonObj;
+    jsonObj.insert("id_card", id_card);
+    jsonObj.insert("amount", amount);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    debitWithdrawManager = new QNetworkAccessManager(this);
+    connect(debitWithdrawManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(debitWithdrawSlot(QNetworkReply*)));
+    reply = debitWithdrawManager->get(request);
+}
+
+void DebitWindow::getOwnerInfoSlot(QNetworkReply *reply)
+{
+    owner_data=reply->readAll();
+    qDebug()<<"DATA : "+owner_data;
+
+    QJsonDocument json_doc = QJsonDocument::fromJson(owner_data);
+    QJsonObject json_obj = json_doc.object();
+    QString ownerdata;
+    ownerdata=json_obj["fname"].toString();
+    qDebug()<<"Tilinomistaja on  " <<ownerdata;
+
+    ui->label_info->setText("Account owner is: "+ ownerdata+ "");
+}
+
 void DebitWindow::on_btn20_clicked()
 {
-    time10=0;
-    emit resettimer30();
+    resets();
     withdraw(20);
-    this->close();
+
 }
 
 
 void DebitWindow::on_btn40_clicked()
 {
-    time10=0;
-    emit resettimer30();
+    resets();
     withdraw(40);
-    this->close();
 }
 
 
 void DebitWindow::on_btn60_clicked()
 {
-    time10=0;
-    emit resettimer30();
+    resets();
     withdraw(60);
-    this->close();
 }
 
 
 void DebitWindow::on_btn100_clicked()
 {
-    time10=0;
-    emit resettimer30();
+    resets();
     withdraw(100);
-    this->close();
 }
 
 
 void DebitWindow::on_btn200_clicked()
 {
-    time10=0;
-    emit resettimer30();
+    resets();
     withdraw(200);
-    this->close();
 }
 
 
 void DebitWindow::on_btn500_clicked()
 {
-    time10=0;
-    emit resettimer30();
+    resets();
     withdraw(500);
-    this->close();
 }
 
 
 void DebitWindow::on_btnBack_clicked()
 {
-    time10=0;
+    timer10sek->stop();
     emit backtomainmenu();
     this->close();
 }
@@ -201,5 +209,13 @@ void DebitWindow::timer10Slot()
     }
 }
 
-
+void DebitWindow::on_btnOther_clicked()
+{
+    amountWindow = new DebitAmountWindow(this);
+    connect(amountWindow, SIGNAL(customAmount(int)), this, SLOT(customAmount(int)));
+    connect(amountWindow, SIGNAL(back()), this, SLOT(showUI()));
+    amountWindow->show();
+    resets();
+    this->hide();
+}
 

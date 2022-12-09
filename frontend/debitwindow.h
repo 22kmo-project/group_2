@@ -6,6 +6,7 @@
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
 #include <QTimer>
+#include "debitamountwindow.h"
 
 namespace Ui {
 class DebitWindow;
@@ -24,6 +25,7 @@ public:
     void getowner();
     void withdraw(int amount);
     void startwindowtimer();
+    void resets();
 
 private slots:
     void on_btn20_clicked();
@@ -39,6 +41,8 @@ private slots:
     void getOwnerInfoSlot(QNetworkReply *reply);
     void getBalanceSlot(QNetworkReply *reply);
     void debitWithdrawSlot(QNetworkReply* reply);
+    void customAmount(int);
+    void showUI();
 
 
 signals:
@@ -53,14 +57,16 @@ private:
     int account_balance;
     int id_card;
     int time10=0;
+    void debitwithdraw(int);
 
     QNetworkAccessManager *getOwnerInfoManager;
-    QNetworkReply *reply;
     QByteArray owner_data;
     QNetworkAccessManager *getBalanceManager;
     QByteArray account_balance_data;
     QNetworkAccessManager *debitWithdrawManager;
     QByteArray debit_withdraw_data;
+    QNetworkReply *reply;
+    DebitAmountWindow *amountWindow;
 };
 
 #endif // DEBITWINDOW_H

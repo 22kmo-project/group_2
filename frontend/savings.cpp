@@ -7,7 +7,7 @@ savings::savings(QString givenToken, int idcard, QWidget *parent) :
     ui(new Ui::savings)
 {
     connect(timer10sek,SIGNAL(timeout()),this,SLOT(timer10Slot()));
-    timer10sek->start(1000);
+
     ui->setupUi(this);
     token = givenToken;
     id_card = idcard;
@@ -17,6 +17,11 @@ savings::savings(QString givenToken, int idcard, QWidget *parent) :
 savings::~savings()
 {
     delete ui;
+}
+
+void savings::startwindowtimer()
+{
+    timer10sek->start(1000);
 }
 
 void savings::on_btn_savingsOn_clicked()

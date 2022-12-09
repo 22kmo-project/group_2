@@ -7,7 +7,14 @@
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
 
-
+/* TÄMÄ OLIO TOIMII LOGINWINDOWINA, TÄMÄN OLION LUO SESSION OLIO
+ OLENNAISIA TOIMINTOJA:
+ Onnistunut login lähettää signaalin jonka mukana QStringit "cardnumber" ja "token"
+ Session olio käsittelee nämä tiedot
+ Tätä oliota EI TUHOTA, tämä piilotetaan this->hide() komennolla
+ Uloskirjautuessa ajetaan funktio joka ylikirjoittaa kaiken tallennetun tiedon,
+ ikkuna palautetaan näkyviin ja ollaan valmiita vastaanottamaan uusi login.
+    Tekijä: Tero Rantanen */
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,8 +31,7 @@ public:
     QString cardnumber;
     QString password;
     QString token;
-    void cleartextsanddata();
-    void pingServer();
+    void cleartextsanddata(int);  // resettaa tallennetun datan
 signals:
     void reset30timer();
     void login(QString,QString);
@@ -33,7 +39,7 @@ signals:
 private slots:
     void on_btn_login_clicked();
     void loginSlot (QNetworkReply *reply);   // loginiin
-    void pingSlot(QNetworkReply * reply);  // pingiin
+
 private:
     Ui::MainWindow *ui;
 

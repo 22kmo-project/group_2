@@ -18,7 +18,7 @@ class savings : public QWidget
 public:
     explicit savings(QString, int, QWidget *parent = nullptr);
     ~savings();
-
+    void startwindowtimer();
 private slots:
     void on_btn_savingsOn_clicked();
 
@@ -43,5 +43,4 @@ private:
     QNetworkReply *reply;
     QByteArray response_data;
 };
-
 #endif // SAVINGS_H

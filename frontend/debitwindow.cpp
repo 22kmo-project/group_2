@@ -34,7 +34,7 @@ void DebitWindow::getbalance()
     reply = getBalanceManager->get(request);
 }
 
-void DebitWindow::getowner()
+/*void DebitWindow::getowner()
 {
     //HAKEE TILINOMISTAJAN TIEDOT
     QString site_url="http://localhost:3000/owner/fname"; //mites sukunimi??
@@ -51,7 +51,7 @@ void DebitWindow::getowner()
 
     connect(getOwnerInfoManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(getOwnerInfoSlot(QNetworkReply*)));
     reply = getOwnerInfoManager->post(request, QJsonDocument(jsonObj).toJson());
-}
+}*/
 
 void DebitWindow::startwindowtimer()
 {
@@ -137,16 +137,7 @@ void DebitWindow::withdraw(int amount)
 
 void DebitWindow::getOwnerInfoSlot(QNetworkReply *reply)
 {
-    owner_data=reply->readAll();
-    qDebug()<<"DATA : "+owner_data;
-
-    QJsonDocument json_doc = QJsonDocument::fromJson(owner_data);
-    QJsonObject json_obj = json_doc.object();
-    QString ownerdata;
-    ownerdata=json_obj["fname"].toString();
-    qDebug()<<"Tilinomistaja on  " <<ownerdata;
-
-    ui->label_info->setText("Account owner is: "+ ownerdata+ "");
+   ui->label_info->setText("Account owner is: "+fname+" "+lname+" "+address+ " " +phonenumber+ " "+email;
 }
 
 void DebitWindow::on_btn20_clicked()

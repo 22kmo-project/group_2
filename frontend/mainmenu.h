@@ -1,28 +1,37 @@
-#ifndef MAINMENU_H
-#define MAINMENU_H
+#ifndef MAINMENUCREDIT_H
+#define MAINMENUCREDIT_H
 
 #include <QMainWindow>
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
 
-
+/*  TÄMÄ OLIO TOIMII DEBIT/CREDIT KORTIN MAINMENUNA
+  TÄMÄN OLION LUONNISTA PÄÄTTÄÄ SESSION OLIO
+  OLENNAISET TOIMINNOT
+ -Sisältää signaalin jolla nollataan Session-olion 30sek timeri
+ -Sisältää signaalin jolla aktivoidaan Session-olion logout() toiminto.
+ -Hakee käynnistyessään kortinomistajan etunimen tervehdykseen
+ -Sisältää julkisen funktion jota Session olio voi kutsua
+  ruudulla näkyvän ajan päivitykseen.
+ -Sisältää nextwindow signaalin jonka mukana menee int-luku Session-oliolle,
+  jolla on toiminto seuraavan ikkunaolion avaamiseen.
+  Tekijä: Tero Rantanen
+*/
 namespace Ui {
-class MainMenu;
+class MainMenuCredit;
 }
 
-class MainMenu : public QMainWindow
+class MainMenuCredit : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainMenu(QString, int, QWidget *parent = nullptr);
-    ~MainMenu();
-
+    explicit MainMenuCredit(QString,QString,int,QWidget *parent = nullptr);
+    ~MainMenuCredit();
     void resetAllTimers();
-    void cleardata();
+
     void updateTimeUi(int);
-    void setFonts();
 
 signals:
     void resettimer30();
@@ -30,7 +39,7 @@ signals:
     void logout();
 
 private:
-    Ui::MainMenu *ui;
+    Ui::MainMenuCredit *ui;
     int id_card;
     QString token;
 
@@ -40,6 +49,8 @@ private:
 
 private slots:
     void on_btn_debit_withdraw_clicked();
+
+
     void on_btn_logs_clicked();
     void on_btn_logout_clicked();
     void getfnameSlot(QNetworkReply *reply);
@@ -47,4 +58,4 @@ private slots:
     void on_btn_debit_balance_clicked();
 };
 
-#endif // MAINMENU_H
+#endif // MAINMENUCREDIT_H

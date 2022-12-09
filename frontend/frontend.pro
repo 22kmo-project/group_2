@@ -9,7 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    debitamountwindow.cpp \
+    debitbalance.cpp \
     debitwindow.cpp \
     main.cpp \
     mainmenu.cpp \
@@ -20,7 +20,7 @@ SOURCES += \
     transactions.cpp
 
 HEADERS += \
-    debitamountwindow.h \
+    debitbalance.h \
     debitwindow.h \
     mainmenu.h \
     mainmenucredit.h \
@@ -30,7 +30,7 @@ HEADERS += \
     transactions.h
 
 FORMS += \
-    debitamountwindow.ui \
+    debitbalance.ui \
     debitwindow.ui \
     mainmenu.ui \
     mainmenucredit.ui \

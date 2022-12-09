@@ -60,7 +60,6 @@ void session::createWindows()    // KAIKKIEN IKKUNAOLIOIDEN KONSTRUKTORIN KUTSU
     transactions = new Transactions(sessiontoken,id_card);
     saving = new savings(sessiontoken,id_card);
     debitwindow = new DebitWindow(sessiontoken,id_card);
-    creditwindow = new CreditWindow(sessiontoken, id_card);
     debitbalance = new Debitbalance(sessiontoken,id_card,credit);
     receiptwindow = new ReceiptWindow(sessiontoken,sessioncardnumber,id_card);
     askforreceipt = new AskForReceipt;
@@ -240,14 +239,6 @@ void session::nextWindowSlot(int i) // IKKUNOIDEN AVAAMISLOGIIKKA JA SIGNAALIEN 
      connect(askforreceipt,SIGNAL(backtomainmenu()),this,SLOT(backtomainmenu()));
      askforreceipt->starttimer();
      askforreceipt->show();
-     break;
- case 7:
-     connect(creditwindow,SIGNAL(backtomainmenu()),this,SLOT(backtomainmenu()));
-     connect(creditwindow,SIGNAL(resettimer30()),this,SLOT(resettimerslot()));
-     connect(creditwindow,SIGNAL(nextwindow(int)),this,SLOT(nextWindowSlot(int)));
-     creditwindow->startwindowtimer();
-     creditwindow->getbalance();
-     creditwindow->show();
      break;
 }
 }

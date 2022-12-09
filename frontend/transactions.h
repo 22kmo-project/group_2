@@ -19,6 +19,8 @@ class Transactions : public QDialog
 public:
     explicit Transactions(QString, int, QWidget *parent = nullptr);
     ~Transactions();
+    void startwindowtimer();
+    void getTransactions();
 
 private slots:
     void on_btn_Back_clicked();
@@ -29,16 +31,21 @@ private slots:
 
     void timer10Slot();
 
+    void timerReset();
+
 signals:
     void backtomainmenu();
+    void resetTimer30();
+    void logoutsignal();
 
 private:
     QTimer * timer10sek = new QTimer;
     Ui::Transactions *ui;
 
-    void getTransactions();
-    void setTransactionsView();
+
+
     void TokenEditor(QJsonDocument);
+    QString parseDate(QString);
 
     QString token;
     int id_card;

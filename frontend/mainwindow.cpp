@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->lineEdit_password->setEchoMode(QLineEdit::Password);   // Salasana kenttään tulee vain palloja
     ui->label_greeting->setText("Welcome to Group_2 ATM, please log in");
-    pingServer();
 
 }
 
@@ -17,47 +16,32 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::cleartextsanddata()
+void MainWindow::cleartextsanddata(int i)
 {
  ui->lineEdit_cardnum->clear();
  ui->lineEdit_password->clear();
-ui->label_loginresponse->setText(" ");
 cardnumber="";
 password="";
 token="";
+if(i != 1){
+    ui->label_loginresponse->setText(" ");
 }
-
-void MainWindow::pingServer()  // tekee get reguestin lukittuun osaan db:tä, tarkistaa onko db päällä
-{
-    QString site_url="http://localhost:3000/card/1";
-    QNetworkRequest request((site_url));
-
-    pingmanager = new QNetworkAccessManager(this);
-
-    connect(pingmanager, SIGNAL(finished (QNetworkReply*)), this, SLOT(pingSlot(QNetworkReply*)));
-
-    reply = pingmanager->get(request);
-
 }
-
-
 
 void MainWindow::on_btn_login_clicked()
 {
-
     cardnumber = ui->lineEdit_cardnum->text();
     password = ui->lineEdit_password->text();
     qDebug()<<cardnumber + " " + password;
-    if(cardnumber.length()<3){
+    if(cardnumber.isEmpty()){
         ui->label_loginresponse->setText("Check cardnumber");
-        cleartextsanddata();
+        cleartextsanddata(1);
     }
-    else if (password.length()<1){
+    else if (password.isEmpty()){
         ui->label_loginresponse->setText("Check password");
-        cleartextsanddata();
+        cleartextsanddata(1);
     }
     else {
-
     QJsonObject jsonObj;
     jsonObj.insert("cardnumber",cardnumber);
     jsonObj.insert("password",password);
@@ -89,24 +73,4 @@ void MainWindow::loginSlot(QNetworkReply *reply)
         qDebug()<< response_data;
         ui->label_loginresponse->setText(response_data);
     }
-
-
 }
-
-void MainWindow::pingSlot(QNetworkReply *reply)
-{
-    response_data=reply->readAll();
-     qDebug()<<"DATA : "+response_data;
-     if(response_data=="Unauthorized"){
-         ui->label_greeting->setText("Welcome to Group_2 ATM, please log in");
-         reply->deleteLater();
-         pingmanager->deleteLater();
-     }
-     if(response_data!="Unauthorized"){
-         ui->label_greeting->setText("Error: Rest Api is offline");
-         reply->deleteLater();
-         pingmanager->deleteLater();
-     }
-
-}
-

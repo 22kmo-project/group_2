@@ -13,6 +13,12 @@
     <height>720</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="minimumSize">
    <size>
     <width>1280</width>
@@ -34,6 +40,11 @@
   <property name="windowTitle">
    <string>Login</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: qlineargradient(spread:pad, x1:0.46, y1:0, x2:0.472, y2:1, stop:0 rgba(0, 20, 15, 255), stop:1 rgba(17, 73, 74, 255));
+color: #c9bfb6;
+QLabel{background-color: transparent;}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label_cardnumber">
     <property name="geometry">
@@ -47,8 +58,11 @@
     <property name="font">
      <font>
       <family>Century Gothic</family>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: transparent;</string>
     </property>
     <property name="text">
      <string>Cardnumber</string>
@@ -66,8 +80,11 @@
     <property name="font">
      <font>
       <family>Century Gothic</family>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: transparent;</string>
     </property>
     <property name="text">
      <string>Password</string>
@@ -82,6 +99,17 @@
       <height>51</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Century Gothic</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: transparent;
+border: 1px solid #c9bfb6;
+padding: 8px;</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_password">
     <property name="geometry">
@@ -92,14 +120,25 @@
       <height>51</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Century Gothic</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: transparent;
+border: 1px solid #c9bfb6;
+padding: 8px;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="btn_login">
     <property name="geometry">
      <rect>
       <x>830</x>
       <y>460</y>
-      <width>171</width>
-      <height>91</height>
+      <width>240</width>
+      <height>90</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -111,9 +150,16 @@
     <property name="font">
      <font>
       <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <pointsize>-1</pointsize>
       <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0.494, y1:0, x2:0.517, y2:1, stop:0 rgba(36, 39, 43, 255), stop:1 rgba(72, 74, 78, 255));
+border:0px solid black;
+border-radius: 12px;
+color: #c9bfb6;
+font-size: 14px;</string>
     </property>
     <property name="text">
      <string>LOGIN</string>
@@ -134,6 +180,9 @@
       <pointsize>12</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: transparent;</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -141,17 +190,20 @@
    <widget class="QLabel" name="label_greeting">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>330</x>
       <y>130</y>
-      <width>471</width>
+      <width>681</width>
       <height>81</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <pointsize>24</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: transparent;</string>
     </property>
     <property name="text">
      <string>Welcome</string>

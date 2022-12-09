@@ -1,7 +1,7 @@
 #include "mainmenucredit.h"
 #include "ui_mainmenucredit.h"
 
-MainMenuCredit::MainMenuCredit(QString t, int idcard,QWidget *parent) :
+MainMenuCredit::MainMenuCredit(QString t, QString name, int idcard,QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainMenuCredit)
 {
@@ -9,21 +9,7 @@ MainMenuCredit::MainMenuCredit(QString t, int idcard,QWidget *parent) :
     id_card=idcard;
     ui->setupUi(this);
 
-    // HAE OWNERIN NIMI TERVEHDYKSEEN
-    QString site_url="http://localhost:3000/owner/fname";
-    QNetworkRequest request((site_url));
-    //WEBTOKEN ALKU
-    QByteArray myToken="Bearer "+token.toLocal8Bit();
-    request.setRawHeader(QByteArray("Authorization"),(myToken));
-    //WEBTOKEN LOPPU
-    getfnamemanager = new QNetworkAccessManager(this);
-
-    QJsonObject jsonObj;  // objekti jonka sisälle dbrequestiin lähtevä data
-    jsonObj.insert("id_card",id_card);
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    connect(getfnamemanager, SIGNAL(finished (QNetworkReply*)), this, SLOT(getfnameSlot(QNetworkReply*)));
-    reply = getfnamemanager->post(request, QJsonDocument(jsonObj).toJson());
+ui->label_greeting->setText("Welcome "+ name+ ", what do you want to do?");
 }
 
 MainMenuCredit::~MainMenuCredit()
@@ -36,11 +22,6 @@ void MainMenuCredit::resetAllTimers()
     emit resettimer30();
 }
 
-void MainMenuCredit::cleardata()
-{
-    id_card = 0;
-    token = "";
-}
 
 void MainMenuCredit::updateTimeUi(int time)
 {
@@ -84,6 +65,14 @@ void MainMenuCredit::on_btn_debit_settings_clicked()
 {
     resetAllTimers();
     emit nextwindow(3);
+    this->hide();
+}
+
+
+void MainMenuCredit::on_btn_debit_balance_clicked()
+{
+    resetAllTimers();
+    emit nextwindow(4);
     this->hide();
 }
 

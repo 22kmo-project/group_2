@@ -96,6 +96,7 @@ void Debitbalance::timer10Slot()
 
 void Debitbalance::on_btn_Back_clicked()
 {
+    emit resettimer30();
     timer10sek->stop();
     emit backtomainmenu();
     this->close();

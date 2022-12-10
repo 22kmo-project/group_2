@@ -1,6 +1,5 @@
 #include "savings.h"
 #include "ui_savings.h"
-#include "session.h"
 #include <QDebug>
 #include <QByteArray>
 
@@ -105,8 +104,8 @@ void savings::updateSavingsSlot(QNetworkReply *reply)
     updateSavings =json_obj["affectedRows"].toInt();
 
     if (updateSavings >0){
-        qDebug()<<"Affected rows: " <<updateSavings;
-        ui->label_savingsresponse->setText("Savings mode is updated succesfully! You can log out. ");
+        qDebug()<<"Updated successfully: " <<updateSavings;
+        ui->label_savingsresponse->setText("Savings mode is updated succesfully! You can now log out. ");
     }
 
     if(updateSavings==0){
@@ -138,16 +137,18 @@ void savings::on_btn_savingsOff_clicked()
     connect(updateSavingsManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(savingsOffSlot(QNetworkReply*)));
     reply = updateSavingsManager->post(request, QJsonDocument(jsonObj).toJson());
 
-   ui->label_savingsOff->setText("Savings mode is now: 0%, you can log out.");
+   ui->label_savingsOff->setText("Saving mode is updated to be 0%, now you can log out.");
 
 }
 
 void savings::savingsOffSlot(QNetworkReply *reply)
 {
     response_data=reply->readAll();
-    qDebug()<<response_data;
+    qDebug()<<"Updated: "<<response_data;
     reply->deleteLater();
     updateSavingsManager->deleteLater();
+
+
 }
 
 

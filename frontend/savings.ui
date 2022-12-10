@@ -20,7 +20,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>50</x>
      <y>0</y>
      <width>281</width>
      <height>101</height>
@@ -36,7 +36,7 @@
     <string notr="true"> background-color: transparent;</string>
    </property>
    <property name="text">
-    <string>SET SAVINGS:</string>
+    <string>Set savings</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -81,7 +81,7 @@
     border:0px solid black;
     border-radius: 12px;
     color: #c9bfb6;
-    font-size: 14px;</string>
+   font-size: 14px;</string>
    </property>
    <property name="text">
     <string>OFF</string>
@@ -205,9 +205,9 @@
   <widget class="QLabel" name="label_savingsresponse">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>350</y>
-     <width>481</width>
+     <x>80</x>
+     <y>340</y>
+     <width>521</width>
      <height>51</height>
     </rect>
    </property>

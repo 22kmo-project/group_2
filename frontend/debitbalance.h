@@ -23,7 +23,8 @@ public:
 private slots:
     void getdebitbalanceSlot(QNetworkReply *reply);
     void getcreditbalanceSlot(QNetworkReply *reply);
-    void timer10Slot();
+    void timer10Slot();    
+    void on_btn_Back_clicked();
 
 signals:
     void backtomainmenu();

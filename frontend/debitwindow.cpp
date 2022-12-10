@@ -1,5 +1,6 @@
 #include "debitwindow.h"
 #include "ui_debitwindow.h"
+#include "session.h"
 #include <QDebug>
 #include <QByteArray>
 
@@ -34,25 +35,6 @@ void DebitWindow::getbalance()
     reply = getBalanceManager->get(request);
 }
 
-/*void DebitWindow::getowner()
-{
-    //HAKEE TILINOMISTAJAN TIEDOT
-    QString site_url="http://localhost:3000/owner/fname"; //mites sukunimi??
-    QNetworkRequest request((site_url));
-    //WEBTOKEN ALKU
-    QByteArray myToken="Bearer "+token.toLocal8Bit();
-    request.setRawHeader(QByteArray("Authorization"),(myToken));
-    //WEBTOKEN LOPPU
-    getOwnerInfoManager = new QNetworkAccessManager(this);
-
-    QJsonObject jsonObj;  // objekti jonka sisälle dbrequestiin lähtevä data
-    jsonObj.insert("id_card",id_card);
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    connect(getOwnerInfoManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(getOwnerInfoSlot(QNetworkReply*)));
-    reply = getOwnerInfoManager->post(request, QJsonDocument(jsonObj).toJson());
-}*/
-
 void DebitWindow::startwindowtimer()
 {
     timer10sek->start(1000);
@@ -78,7 +60,22 @@ void DebitWindow::getBalanceSlot(QNetworkReply *reply)
     qDebug()<<"Kortin saldo on  " <<balance;
 
     ui->label_balance->setText("Your account balance is: "+ QString::number(balance));
-    getowner();
+    getowner();DebitWindow
+}
+
+void DebitWindow::getowner()
+{
+    //HAKEE TILINOMISTAJAN TIEDOT
+    QString site_url="http://localhost:3000/owner/alldata/" + QString::number(id_card); //mites sukunimi??
+    QNetworkRequest request(site_url);
+    //WEBTOKEN ALKU
+    QByteArray myToken="Bearer "+token.toLocal8Bit();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
+    //WEBTOKEN LOPPU
+    getOwnerInfoManager = new QNetworkAccessManager(this);
+
+    connect(getOwnerInfoManager, SIGNAL(finished (QNetworkReply)), this, SLOT(getOwnerInfoSlot(QNetworkReply)));
+    reply = getOwnerInfoManager->get(request);
 }
 
 void DebitWindow::debitWithdrawSlot(QNetworkReply *reply)
@@ -137,7 +134,22 @@ void DebitWindow::withdraw(int amount)
 
 void DebitWindow::getOwnerInfoSlot(QNetworkReply *reply)
 {
-   ui->label_info->setText("Account owner is: "+fname+" "+lname+" "+address+ " " +phonenumber+ " "+email;
+    owner_data=reply->readAll();
+    qDebug()<<"DATA : "+owner_data;
+
+    QJsonDocument json_doc = QJsonDocument::fromJson(owner_data);
+    QJsonObject json_obj = json_doc.object();
+    QString ownerfname = json_obj["fname"].toString();
+    QString ownerlname = json_obj["lname"].toString();
+    QString address = json_obj["address"].toString();
+    QString phonenumber = json_obj["phonenumber"].toString();
+    QString email = json_obj["email"].toString();
+    QString ownerInfo =
+            "Account owner: " + ownerfname + " " + ownerlname + "\n" +
+            "Address: " + address + "\n" +
+            "Phonenumber: " + phonenumber + "\n"
+            "Email: " + email + "\n";
+    ui->label_info->setText(ownerInfo);
 }
 
 void DebitWindow::on_btn20_clicked()

@@ -46,6 +46,7 @@ private slots:
 signals:
     void backtomainmenu();
     void logout();
+    void resetTimer30();
 
 
 private:

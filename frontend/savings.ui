@@ -127,6 +127,9 @@
     padding: 8px;
     color: #c9bfb6;</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QPushButton" name="btn_save_savings">
    <property name="geometry">
